@@ -1,20 +1,48 @@
-# The Java Wrapper - For Worldpay Within
+# Worldpay Within - The Java SDK
 
-## Setup
+The Java implementation for the Worldpay Within IoT payment SDK. This SDK, or Software Development Kit, enables smart devices to discover each other, negogiate a price for services, make a payment (through the Worldpay payments gateway) for services, and then consume services via a 'trusted trigger'. For more information see our documentation website here: http://www.worldpaywithin.com
 
-* **Prerequisite**: Correctly installed and configured Java (1.7) runtime.
-* In your project, reference `WPWithin.jar` from the releases section
+![The Worldpay Within puzzle piece](http://wptechinnovation.github.io/worldpay-within-sdk/images/architecture/worldpayWithinFig1.png)
 
-## Running the test apps
+## Get started
+1. Download this repo
+2. Add the example projects to netbeans (or go it alone creating your own project from the source code and jars - In your project, reference `WPWithin.jar` from the releases section and the other jars in lib)
+3. Run the examples...
 
-[There is lot's of detail here on running the RPC Agent, or the Client app with the Java example programs](https://github.com/WPTechInnovation/worldpay-within-sdk/tree/develop/applications/dev-client)
+## Run the examples
+* Run the consumer project
+* Simultaneously run the producer or producer-callbacks project
+* The two smart devices should communicate with each other and make a payment
 
-[There's also further information here on orchestrating multiple applications in Java or Node.js](http://wptechinnovation.github.io/worldpay-within-sdk/getting-started.html)
+## Compatibility and pre-requisites
+* Assumption here is you have the Java 1.7 JRE at least
+* Java 1.7 SDK even better
+* This works with Java 1.8 too...
+
+## See the payments:
+1. Sign up to https://online.worldpay.com if you haven't already done so
+2. Got to settings > API keys and get your test keys
+3. Replace the keys in the consumer and producer java example source files
+4. Re-run the examples and you should see the payments coming through on the WPOP (Worldpay Online) payments dashboard
+
+## Debugging:
+* If you get some odd error messages talking about a 'rpc-agent'
+* Try typing the following command: 'ps -e | grep rpc' to get the pid(s) of rpc-agents that are running. 
+* Then do kill &lt;pid&gt; e.g. kill 13249234 to kill these processes.
+* Try re-running the examples - if this fails then please contact us at innovation@worldpay.com or on our slack channel or raise an issue in github.
+  
+## So what does it do:
+
+![The Worldpay Within Flows sequence diagram](http://wptechinnovation.github.io/worldpay-within-sdk/images/architecture/serviceOverview.png)
+
+You can see there are four phases; discover, negotiation, payment and then service delivery, for more information visit our website at http://www.worldpaywithin.com.
+
+[The flows and API can be found here](http://wptechinnovation.github.io/worldpay-within-sdk/the-flows.html)
 
 ## The Javadoc
 
 [The javadoc for the wrapper can be found here](http://wptechinnovation.github.io/worldpay-within-sdk/wrapper-doc/javadoc/)
 
-## The flows and API
+## Want to contribute:
 
-[The flows and API can be found here](http://wptechinnovation.github.io/worldpay-within-sdk/the-flows.html)
+Want to contribute, then please clone the repo and create a branch, once you've made your changes create a pull request, we will review your code, and if accepted it will be merged into the code base. You can also raise issues here on github, or contact us direct at innovation@worldpay.com or alternatively join our slack channel at iotpay.slack.com.
