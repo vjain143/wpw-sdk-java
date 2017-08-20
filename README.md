@@ -17,7 +17,6 @@ The Java implementation for the Worldpay Within IoT payment SDK. This SDK, or So
 ## Compatibility and pre-requisites
 * Assumption here is you have the Java 1.7 JRE at least
 * Java 1.7 SDK even better
-* This works with Java 1.8 too...
 
 ## See the payments:
 1. Sign up to https://online.worldpay.com if you haven't already done so
