@@ -571,3 +571,355 @@ time="2017-08-24T20:55:49+01:00" level=info msg="Did decode broadcast message: t
 time="2017-08-24T20:55:50+01:00" level=debug msg="Did receive message from 192.168.1.22:62566: {\"deviceDescription\":\"Car charger WorldpayWithin producer\",\"hostname\":\"192.168.1.22\",\"portNumber\":64521,\"serverID\":\"447af87c-8622-4804-4178-d3ead6cbaead\",\"urlPrefix\":\"\",\"scheme\":\"http://\",\"deviceName\":\"PROD-001-CHARGER\"}" 
 time="2017-08-24T20:55:50+01:00" level=info msg="Did decode broadcast message: types.BroadcastMessage{DeviceDescription:\"Car charger WorldpayWithin producer\", Hostname:\"192.168.1.22\", PortNumber:64521, ServerID:\"447af87c-8622-4804-4178-d3ead6cbaead\", URLPrefix:\"\", Scheme:\"http://\"}" 
 time="2017-08-24T20:55:54+01:00" level=debug msg="Did receive message from 192.168.1.22:49667: {\"deviceDescription\":\"Car charger WorldpayWithin producer\",\"hostname\":\"192.168.1.22\",\"portNumber\":64521,\"serverID\":\"447af87c-8622-4804-4178-d3ead6cbaead\",\"urlPrefix\":\"\",\"scheme\":\"http://\",\"deviceName\":\"PROD-001-CHARGER\"}" 
+time="2017-08-24T21:02:53+01:00" level=debug msg="End log setup" 
+time="2017-08-24T21:02:53+01:00" level=debug msg="After initLogFile()" 
+time="2017-08-24T21:02:53+01:00" level=debug msg="Before startRPC()" 
+time="2017-08-24T21:02:53+01:00" level=debug msg="Before startRPC()" 
+time="2017-08-24T21:02:53+01:00" level=debug msg="Before assign RPC config." 
+time="2017-08-24T21:02:53+01:00" level=debug msg="After assign RPC config." 
+time="2017-08-24T21:02:53+01:00" level=debug msg="Before rpc.NewService" Configuration: ="{Protocol:binary Framed:false Buffered:false Host:127.0.0.1 Port:10001 Secure:false BufferSize:8192 Loglevel: Logfile: CallbackPort:0}" 
+time="2017-08-24T21:02:53+01:00" level=debug msg="begin rpc.ServiceImpl.NewService()" Config="{Protocol:binary Framed:false Buffered:false Host:127.0.0.1 Port:10001 Secure:false BufferSize:8192 Loglevel: Logfile: CallbackPort:0}" 
+time="2017-08-24T21:02:53+01:00" level=debug msg="end rpc.ServiceImpl.NewService()" 
+time="2017-08-24T21:02:53+01:00" level=debug msg="After rpc.NewService" 
+time="2017-08-24T21:02:53+01:00" level=debug msg="Attempting to start RPC interface on port" port=10001 
+time="2017-08-24T21:02:53+01:00" level=debug msg="begin rpc.ServiceImpl.start()" 
+time="2017-08-24T21:02:53+01:00" level=debug msg="Begin RPC.WPWithinHandler.NewWPWithinHander()" 
+time="2017-08-24T21:02:53+01:00" level=debug msg="End RPC.WPWithinHandler.NewWPWithinHander()" 
+time="2017-08-24T21:02:53+01:00" level=debug msg="Starting the rpc server on...: 127.0.0.1:10001" 
+time="2017-08-24T21:02:54+01:00" level=debug msg="Begin RPC.WPWithinHandler.Setup()" 
+time="2017-08-24T21:02:54+01:00" level=debug msg="begin wpwithin.Initialise()" description="Kevin Gordons Java DEVICE SCANNER" name=kevingwp-java-scanner 
+time="2017-08-24T21:02:54+01:00" level=debug msg="Will perform parameter validation" 
+time="2017-08-24T21:02:54+01:00" level=debug msg="Parameter validation passed" 
+time="2017-08-24T21:02:54+01:00" level=debug msg="Will create new core.SDKFactory" 
+time="2017-08-24T21:02:54+01:00" level=debug msg="Did create new core.SDKFactory" 
+time="2017-08-24T21:02:54+01:00" level=debug msg="Will create new core.Core" 
+time="2017-08-24T21:02:54+01:00" level=debug msg="Did create new core.Core" 
+time="2017-08-24T21:02:54+01:00" level=error msg="Unable to load configuration file wpwconfig.json" Error="open wpwconfig.json: no such file or directory" 
+time="2017-08-24T21:02:54+01:00" level=debug msg="Will call doWebSocketLogSetup()" 
+time="2017-08-24T21:02:54+01:00" level=debug msg="Begin wpwithin.doWebSocketLogSetup()" Configuration={false 0 } 
+time="2017-08-24T21:02:54+01:00" level=debug msg="Config.WSLogEnable is false -- didn't setup WS Logger" 
+time="2017-08-24T21:02:54+01:00" level=debug msg="End doWebSocketLogSetup()" 
+time="2017-08-24T21:02:54+01:00" level=debug msg="After call doWebSocketLogSetup()" 
+time="2017-08-24T21:02:54+01:00" level=debug msg="Will call Factory.GetDevice()" description="Kevin Gordons Java DEVICE SCANNER" name=kevingwp-java-scanner 
+time="2017-08-24T21:02:54+01:00" level=debug msg="Will call Factory.GetOrderManager()" 
+time="2017-08-24T21:02:54+01:00" level=debug msg="After call Factory.GetOrderManager()" 
+time="2017-08-24T21:02:54+01:00" level=debug msg="Will call Factory.GetSvcBroadcaster()" 
+time="2017-08-24T21:02:54+01:00" level=debug msg="After call Factory.GetSvcBroadcaster()" 
+time="2017-08-24T21:02:54+01:00" level=debug msg="Will call Factory.GetSvcScanner()" 
+time="2017-08-24T21:02:54+01:00" level=debug msg="After call Factory.GetSvcScanner()" 
+time="2017-08-24T21:02:54+01:00" level=debug msg="end wpwithin.Initialise()" 
+time="2017-08-24T21:02:54+01:00" level=debug msg="wp.callback not set, not setting handler in WPWithin." 
+time="2017-08-24T21:02:54+01:00" level=debug msg="End RPC.WPWithinHandler.Setup()" 
+time="2017-08-24T21:02:54+01:00" level=debug msg="Begin RPC.WPWithinHandler.GetDevice()" 
+time="2017-08-24T21:02:54+01:00" level=debug msg="Begin wpwithin.GetDevice()" 
+time="2017-08-24T21:02:54+01:00" level=debug msg="End wpwithin.GetDevice()" Device=&{b0397c23-5267-436c-4311-b0e26ccb0570 kevingwp-java-scanner Kevin Gordons Java DEVICE SCANNER map[] 192.168.1.22} 
+time="2017-08-24T21:02:54+01:00" level=debug msg="Found 0 services for device" 
+time="2017-08-24T21:02:54+01:00" level=debug msg="End RPC.WPWithinHandler.GetDevice()" 
+time="2017-08-24T21:02:54+01:00" level=debug msg="Begin RPC.WPWithinHandler.ServiceDiscovery()" 
+time="2017-08-24T21:02:54+01:00" level=debug msg="Begin wpwithin.DeviceDiscovery()" timeoutMillis=9000 
+time="2017-08-24T21:02:54+01:00" level=debug msg="Will call wp.core.SvcScanner.ScanForServices()" 
+time="2017-08-24T21:02:54+01:00" level=debug msg="Begin ScanForServices(timeout = 9000)" 
+time="2017-08-24T21:02:56+01:00" level=debug msg="Did receive message from 192.168.1.22:49947: {\"deviceDescription\":\"Example WorldpayWithin producer\",\"hostname\":\"192.168.1.22\",\"portNumber\":64521,\"serverID\":\"b9e343f8-78dd-4037-590d-b35c1647cfd7\",\"urlPrefix\":\"\",\"scheme\":\"http://\"}" 
+time="2017-08-24T21:02:56+01:00" level=info msg="Did decode broadcast message: types.BroadcastMessage{DeviceDescription:\"Example WorldpayWithin producer\", Hostname:\"192.168.1.22\", PortNumber:64521, ServerID:\"b9e343f8-78dd-4037-590d-b35c1647cfd7\", URLPrefix:\"\", Scheme:\"http://\"}" 
+time="2017-08-24T21:03:01+01:00" level=debug msg="Did receive message from 192.168.1.22:50601: {\"deviceDescription\":\"Example WorldpayWithin producer\",\"hostname\":\"192.168.1.22\",\"portNumber\":64521,\"serverID\":\"b9e343f8-78dd-4037-590d-b35c1647cfd7\",\"urlPrefix\":\"\",\"scheme\":\"http://\"}" 
+time="2017-08-24T21:03:01+01:00" level=info msg="Did decode broadcast message: types.BroadcastMessage{DeviceDescription:\"Example WorldpayWithin producer\", Hostname:\"192.168.1.22\", PortNumber:64521, ServerID:\"b9e343f8-78dd-4037-590d-b35c1647cfd7\", URLPrefix:\"\", Scheme:\"http://\"}" 
+time="2017-08-24T21:03:06+01:00" level=debug msg="Finish ScanForServices()" Found=1 Run=true Timed out=true 
+time="2017-08-24T21:03:06+01:00" level=debug msg="Did call wp.core.SvcScanner.ScanForServices()" Count devices=1 
+time="2017-08-24T21:03:06+01:00" level=info msg="Did find %d devices1" 
+time="2017-08-24T21:03:06+01:00" level=debug msg="After call wp.core.SvcScanner.ScanForService()" 
+time="2017-08-24T21:03:06+01:00" level=debug msg="End wpwithin.DeviceDiscovery()" Search result=[{Example WorldpayWithin producer 192.168.1.22 64521 b9e343f8-78dd-4037-590d-b35c1647cfd7  http://}] 
+time="2017-08-24T21:03:06+01:00" level=debug msg="End RPC.WPWithinHandler.ServiceDiscovery()" 
+time="2017-08-24T21:03:06+01:00" level=debug msg="Begin RPC.WPWithinHandler.Setup()" 
+time="2017-08-24T21:03:06+01:00" level=debug msg="begin wpwithin.Initialise()" description="Kevin Gordons Java DEVICE SCANNER" name=kevingwp-java-scanner 
+time="2017-08-24T21:03:06+01:00" level=debug msg="Will perform parameter validation" 
+time="2017-08-24T21:03:06+01:00" level=debug msg="Parameter validation passed" 
+time="2017-08-24T21:03:06+01:00" level=debug msg="Will create new core.Core" 
+time="2017-08-24T21:03:06+01:00" level=debug msg="Did create new core.Core" 
+time="2017-08-24T21:03:06+01:00" level=error msg="Unable to load configuration file wpwconfig.json" Error="open wpwconfig.json: no such file or directory" 
+time="2017-08-24T21:03:06+01:00" level=debug msg="Will call doWebSocketLogSetup()" 
+time="2017-08-24T21:03:06+01:00" level=debug msg="Begin wpwithin.doWebSocketLogSetup()" Configuration={false 0 } 
+time="2017-08-24T21:03:06+01:00" level=debug msg="Config.WSLogEnable is false -- didn't setup WS Logger" 
+time="2017-08-24T21:03:06+01:00" level=debug msg="End doWebSocketLogSetup()" 
+time="2017-08-24T21:03:06+01:00" level=debug msg="After call doWebSocketLogSetup()" 
+time="2017-08-24T21:03:06+01:00" level=debug msg="Will call Factory.GetDevice()" description="Kevin Gordons Java DEVICE SCANNER" name=kevingwp-java-scanner 
+time="2017-08-24T21:03:06+01:00" level=debug msg="Will call Factory.GetOrderManager()" 
+time="2017-08-24T21:03:06+01:00" level=debug msg="After call Factory.GetOrderManager()" 
+time="2017-08-24T21:03:06+01:00" level=debug msg="Will call Factory.GetSvcBroadcaster()" 
+time="2017-08-24T21:03:06+01:00" level=debug msg="After call Factory.GetSvcBroadcaster()" 
+time="2017-08-24T21:03:06+01:00" level=debug msg="Will call Factory.GetSvcScanner()" 
+time="2017-08-24T21:03:06+01:00" level=debug msg="After call Factory.GetSvcScanner()" 
+time="2017-08-24T21:03:06+01:00" level=debug msg="end wpwithin.Initialise()" 
+time="2017-08-24T21:03:06+01:00" level=debug msg="wp.callback not set, not setting handler in WPWithin." 
+time="2017-08-24T21:03:06+01:00" level=debug msg="End RPC.WPWithinHandler.Setup()" 
+time="2017-08-24T21:03:06+01:00" level=debug msg="Begin RPC.WPWithinHandler.GetDevice()" 
+time="2017-08-24T21:03:06+01:00" level=debug msg="Begin wpwithin.GetDevice()" 
+time="2017-08-24T21:03:06+01:00" level=debug msg="End wpwithin.GetDevice()" Device=&{b0397c23-5267-436c-4311-b0e26ccb0570 kevingwp-java-scanner Kevin Gordons Java DEVICE SCANNER map[] 192.168.1.22} 
+time="2017-08-24T21:03:06+01:00" level=debug msg="Found 0 services for device" 
+time="2017-08-24T21:03:06+01:00" level=debug msg="End RPC.WPWithinHandler.GetDevice()" 
+time="2017-08-24T21:03:06+01:00" level=debug msg="Begin RPC.WPWithinHandler.ServiceDiscovery()" 
+time="2017-08-24T21:03:06+01:00" level=debug msg="Begin wpwithin.DeviceDiscovery()" timeoutMillis=9000 
+time="2017-08-24T21:03:06+01:00" level=debug msg="Will call wp.core.SvcScanner.ScanForServices()" 
+time="2017-08-24T21:03:06+01:00" level=debug msg="Begin ScanForServices(timeout = 9000)" 
+time="2017-08-24T21:03:11+01:00" level=debug msg="Did receive message from 192.168.1.22:57164: {\"deviceDescription\":\"Example WorldpayWithin producer\",\"hostname\":\"192.168.1.22\",\"portNumber\":64521,\"serverID\":\"b9e343f8-78dd-4037-590d-b35c1647cfd7\",\"urlPrefix\":\"\",\"scheme\":\"http://\"}" 
+time="2017-08-24T21:03:11+01:00" level=info msg="Did decode broadcast message: types.BroadcastMessage{DeviceDescription:\"Example WorldpayWithin producer\", Hostname:\"192.168.1.22\", PortNumber:64521, ServerID:\"b9e343f8-78dd-4037-590d-b35c1647cfd7\", URLPrefix:\"\", Scheme:\"http://\"}" 
+time="2017-08-24T21:03:15+01:00" level=debug msg="Begin RPC.WPWithinHandler.Setup()" 
+time="2017-08-24T21:03:15+01:00" level=debug msg="begin wpwithin.Initialise()" description="an example consumer device" name=my-device 
+time="2017-08-24T21:03:15+01:00" level=debug msg="Will perform parameter validation" 
+time="2017-08-24T21:03:15+01:00" level=debug msg="Parameter validation passed" 
+time="2017-08-24T21:03:15+01:00" level=debug msg="Will create new core.Core" 
+time="2017-08-24T21:03:15+01:00" level=debug msg="Did create new core.Core" 
+time="2017-08-24T21:03:15+01:00" level=error msg="Unable to load configuration file wpwconfig.json" Error="open wpwconfig.json: no such file or directory" 
+time="2017-08-24T21:03:15+01:00" level=debug msg="Will call doWebSocketLogSetup()" 
+time="2017-08-24T21:03:15+01:00" level=debug msg="Begin wpwithin.doWebSocketLogSetup()" Configuration={false 0 } 
+time="2017-08-24T21:03:15+01:00" level=debug msg="Config.WSLogEnable is false -- didn't setup WS Logger" 
+time="2017-08-24T21:03:15+01:00" level=debug msg="End doWebSocketLogSetup()" 
+time="2017-08-24T21:03:15+01:00" level=debug msg="After call doWebSocketLogSetup()" 
+time="2017-08-24T21:03:15+01:00" level=debug msg="Will call Factory.GetDevice()" description="an example consumer device" name=my-device 
+time="2017-08-24T21:03:15+01:00" level=debug msg="Will call Factory.GetOrderManager()" 
+time="2017-08-24T21:03:15+01:00" level=debug msg="After call Factory.GetOrderManager()" 
+time="2017-08-24T21:03:15+01:00" level=debug msg="Will call Factory.GetSvcBroadcaster()" 
+time="2017-08-24T21:03:15+01:00" level=debug msg="After call Factory.GetSvcBroadcaster()" 
+time="2017-08-24T21:03:15+01:00" level=debug msg="Will call Factory.GetSvcScanner()" 
+time="2017-08-24T21:03:15+01:00" level=debug msg="After call Factory.GetSvcScanner()" 
+time="2017-08-24T21:03:15+01:00" level=debug msg="end wpwithin.Initialise()" 
+time="2017-08-24T21:03:15+01:00" level=debug msg="wp.callback not set, not setting handler in WPWithin." 
+time="2017-08-24T21:03:15+01:00" level=debug msg="End RPC.WPWithinHandler.Setup()" 
+time="2017-08-24T21:03:15+01:00" level=debug msg="Begin RPC.WPWithinHandler.GetDevice()" 
+time="2017-08-24T21:03:15+01:00" level=debug msg="Begin wpwithin.GetDevice()" 
+time="2017-08-24T21:03:15+01:00" level=debug msg="End wpwithin.GetDevice()" Device=&{b0397c23-5267-436c-4311-b0e26ccb0570 my-device an example consumer device map[] 192.168.1.22} 
+time="2017-08-24T21:03:15+01:00" level=debug msg="Found 0 services for device" 
+time="2017-08-24T21:03:15+01:00" level=debug msg="End RPC.WPWithinHandler.GetDevice()" 
+time="2017-08-24T21:03:15+01:00" level=debug msg="Begin RPC.WPWithinHandler.ServiceDiscovery()" 
+time="2017-08-24T21:03:15+01:00" level=debug msg="Begin wpwithin.DeviceDiscovery()" timeoutMillis=15000 
+time="2017-08-24T21:03:15+01:00" level=debug msg="Will call wp.core.SvcScanner.ScanForServices()" 
+time="2017-08-24T21:03:15+01:00" level=debug msg="Begin ScanForServices(timeout = 15000)" 
+time="2017-08-24T21:03:16+01:00" level=debug msg="Finish ScanForServices()" Found=1 Run=true Timed out=true 
+time="2017-08-24T21:03:16+01:00" level=debug msg="Did receive message from 192.168.1.22:63378: {\"deviceDescription\":\"Example WorldpayWithin producer\",\"hostname\":\"192.168.1.22\",\"portNumber\":64521,\"serverID\":\"b9e343f8-78dd-4037-590d-b35c1647cfd7\",\"urlPrefix\":\"\",\"scheme\":\"http://\"}" 
+time="2017-08-24T21:03:16+01:00" level=debug msg="Did call wp.core.SvcScanner.ScanForServices()" Count devices=1 
+time="2017-08-24T21:03:16+01:00" level=info msg="Did find %d devices1" 
+time="2017-08-24T21:03:16+01:00" level=info msg="Did decode broadcast message: types.BroadcastMessage{DeviceDescription:\"Example WorldpayWithin producer\", Hostname:\"192.168.1.22\", PortNumber:64521, ServerID:\"b9e343f8-78dd-4037-590d-b35c1647cfd7\", URLPrefix:\"\", Scheme:\"http://\"}" 
+time="2017-08-24T21:03:16+01:00" level=debug msg="After call wp.core.SvcScanner.ScanForService()" 
+time="2017-08-24T21:03:16+01:00" level=debug msg="End wpwithin.DeviceDiscovery()" Search result=[{Example WorldpayWithin producer 192.168.1.22 64521 b9e343f8-78dd-4037-590d-b35c1647cfd7  http://}] 
+time="2017-08-24T21:03:16+01:00" level=debug msg="End RPC.WPWithinHandler.ServiceDiscovery()" 
+time="2017-08-24T21:03:16+01:00" level=debug msg="Begin RPC.WPWithinHandler.Setup()" 
+time="2017-08-24T21:03:16+01:00" level=debug msg="begin wpwithin.Initialise()" description="Kevin Gordons Java DEVICE SCANNER" name=kevingwp-java-scanner 
+time="2017-08-24T21:03:16+01:00" level=debug msg="Will perform parameter validation" 
+time="2017-08-24T21:03:16+01:00" level=debug msg="Parameter validation passed" 
+time="2017-08-24T21:03:16+01:00" level=debug msg="Will create new core.Core" 
+time="2017-08-24T21:03:16+01:00" level=debug msg="Did create new core.Core" 
+time="2017-08-24T21:03:16+01:00" level=error msg="Unable to load configuration file wpwconfig.json" Error="open wpwconfig.json: no such file or directory" 
+time="2017-08-24T21:03:16+01:00" level=debug msg="Will call doWebSocketLogSetup()" 
+time="2017-08-24T21:03:16+01:00" level=debug msg="Begin wpwithin.doWebSocketLogSetup()" Configuration={false 0 } 
+time="2017-08-24T21:03:16+01:00" level=debug msg="Config.WSLogEnable is false -- didn't setup WS Logger" 
+time="2017-08-24T21:03:16+01:00" level=debug msg="End doWebSocketLogSetup()" 
+time="2017-08-24T21:03:16+01:00" level=debug msg="After call doWebSocketLogSetup()" 
+time="2017-08-24T21:03:16+01:00" level=debug msg="Will call Factory.GetDevice()" description="Kevin Gordons Java DEVICE SCANNER" name=kevingwp-java-scanner 
+time="2017-08-24T21:03:16+01:00" level=debug msg="Will call Factory.GetOrderManager()" 
+time="2017-08-24T21:03:16+01:00" level=debug msg="After call Factory.GetOrderManager()" 
+time="2017-08-24T21:03:16+01:00" level=debug msg="Will call Factory.GetSvcBroadcaster()" 
+time="2017-08-24T21:03:16+01:00" level=debug msg="After call Factory.GetSvcBroadcaster()" 
+time="2017-08-24T21:03:16+01:00" level=debug msg="Will call Factory.GetSvcScanner()" 
+time="2017-08-24T21:03:16+01:00" level=debug msg="After call Factory.GetSvcScanner()" 
+time="2017-08-24T21:03:16+01:00" level=debug msg="end wpwithin.Initialise()" 
+time="2017-08-24T21:03:16+01:00" level=debug msg="wp.callback not set, not setting handler in WPWithin." 
+time="2017-08-24T21:03:16+01:00" level=debug msg="End RPC.WPWithinHandler.Setup()" 
+time="2017-08-24T21:03:16+01:00" level=debug msg="Begin RPC.WPWithinHandler.GetDevice()" 
+time="2017-08-24T21:03:16+01:00" level=debug msg="Begin wpwithin.GetDevice()" 
+time="2017-08-24T21:03:16+01:00" level=debug msg="End wpwithin.GetDevice()" Device=&{b0397c23-5267-436c-4311-b0e26ccb0570 kevingwp-java-scanner Kevin Gordons Java DEVICE SCANNER map[] 192.168.1.22} 
+time="2017-08-24T21:03:16+01:00" level=debug msg="Found 0 services for device" 
+time="2017-08-24T21:03:16+01:00" level=debug msg="End RPC.WPWithinHandler.GetDevice()" 
+time="2017-08-24T21:03:16+01:00" level=debug msg="Begin RPC.WPWithinHandler.ServiceDiscovery()" 
+time="2017-08-24T21:03:16+01:00" level=debug msg="Begin wpwithin.DeviceDiscovery()" timeoutMillis=9000 
+time="2017-08-24T21:03:16+01:00" level=debug msg="Will call wp.core.SvcScanner.ScanForServices()" 
+time="2017-08-24T21:03:16+01:00" level=debug msg="Begin ScanForServices(timeout = 9000)" 
+time="2017-08-24T21:03:21+01:00" level=debug msg="Did receive message from 192.168.1.22:49338: {\"deviceDescription\":\"Example WorldpayWithin producer\",\"hostname\":\"192.168.1.22\",\"portNumber\":64521,\"serverID\":\"b9e343f8-78dd-4037-590d-b35c1647cfd7\",\"urlPrefix\":\"\",\"scheme\":\"http://\"}" 
+time="2017-08-24T21:03:21+01:00" level=debug msg="Did receive message from 192.168.1.22:49338: {\"deviceDescription\":\"Example WorldpayWithin producer\",\"hostname\":\"192.168.1.22\",\"portNumber\":64521,\"serverID\":\"b9e343f8-78dd-4037-590d-b35c1647cfd7\",\"urlPrefix\":\"\",\"scheme\":\"http://\"}" 
+time="2017-08-24T21:03:21+01:00" level=info msg="Did decode broadcast message: types.BroadcastMessage{DeviceDescription:\"Example WorldpayWithin producer\", Hostname:\"192.168.1.22\", PortNumber:64521, ServerID:\"b9e343f8-78dd-4037-590d-b35c1647cfd7\", URLPrefix:\"\", Scheme:\"http://\"}" 
+time="2017-08-24T21:03:21+01:00" level=info msg="Did decode broadcast message: types.BroadcastMessage{DeviceDescription:\"Example WorldpayWithin producer\", Hostname:\"192.168.1.22\", PortNumber:64521, ServerID:\"b9e343f8-78dd-4037-590d-b35c1647cfd7\", URLPrefix:\"\", Scheme:\"http://\"}" 
+time="2017-08-24T21:03:26+01:00" level=debug msg="Finish ScanForServices()" Found=1 Run=true Timed out=true 
+time="2017-08-24T21:03:26+01:00" level=debug msg="Did call wp.core.SvcScanner.ScanForServices()" Count devices=1 
+time="2017-08-24T21:03:26+01:00" level=info msg="Did find %d devices1" 
+time="2017-08-24T21:03:26+01:00" level=debug msg="After call wp.core.SvcScanner.ScanForService()" 
+time="2017-08-24T21:03:26+01:00" level=debug msg="End wpwithin.DeviceDiscovery()" Search result=[{Example WorldpayWithin producer 192.168.1.22 64521 b9e343f8-78dd-4037-590d-b35c1647cfd7  http://}] 
+time="2017-08-24T21:03:26+01:00" level=debug msg="End RPC.WPWithinHandler.ServiceDiscovery()" 
+time="2017-08-24T21:03:26+01:00" level=debug msg="Did receive message from 192.168.1.22:64141: {\"deviceDescription\":\"Example WorldpayWithin producer\",\"hostname\":\"192.168.1.22\",\"portNumber\":64521,\"serverID\":\"b9e343f8-78dd-4037-590d-b35c1647cfd7\",\"urlPrefix\":\"\",\"scheme\":\"http://\"}" 
+time="2017-08-24T21:03:26+01:00" level=info msg="Did decode broadcast message: types.BroadcastMessage{DeviceDescription:\"Example WorldpayWithin producer\", Hostname:\"192.168.1.22\", PortNumber:64521, ServerID:\"b9e343f8-78dd-4037-590d-b35c1647cfd7\", URLPrefix:\"\", Scheme:\"http://\"}" 
+time="2017-08-24T21:03:26+01:00" level=debug msg="Begin RPC.WPWithinHandler.Setup()" 
+time="2017-08-24T21:03:26+01:00" level=debug msg="begin wpwithin.Initialise()" description="Kevin Gordons Java DEVICE SCANNER" name=kevingwp-java-scanner 
+time="2017-08-24T21:03:26+01:00" level=debug msg="Will perform parameter validation" 
+time="2017-08-24T21:03:26+01:00" level=debug msg="Parameter validation passed" 
+time="2017-08-24T21:03:26+01:00" level=debug msg="Will create new core.Core" 
+time="2017-08-24T21:03:26+01:00" level=debug msg="Did create new core.Core" 
+time="2017-08-24T21:03:26+01:00" level=error msg="Unable to load configuration file wpwconfig.json" Error="open wpwconfig.json: no such file or directory" 
+time="2017-08-24T21:03:26+01:00" level=debug msg="Will call doWebSocketLogSetup()" 
+time="2017-08-24T21:03:26+01:00" level=debug msg="Begin wpwithin.doWebSocketLogSetup()" Configuration={false 0 } 
+time="2017-08-24T21:03:26+01:00" level=debug msg="Config.WSLogEnable is false -- didn't setup WS Logger" 
+time="2017-08-24T21:03:26+01:00" level=debug msg="End doWebSocketLogSetup()" 
+time="2017-08-24T21:03:26+01:00" level=debug msg="After call doWebSocketLogSetup()" 
+time="2017-08-24T21:03:26+01:00" level=debug msg="Will call Factory.GetDevice()" description="Kevin Gordons Java DEVICE SCANNER" name=kevingwp-java-scanner 
+time="2017-08-24T21:03:26+01:00" level=debug msg="Will call Factory.GetOrderManager()" 
+time="2017-08-24T21:03:26+01:00" level=debug msg="After call Factory.GetOrderManager()" 
+time="2017-08-24T21:03:26+01:00" level=debug msg="Will call Factory.GetSvcBroadcaster()" 
+time="2017-08-24T21:03:26+01:00" level=debug msg="After call Factory.GetSvcBroadcaster()" 
+time="2017-08-24T21:03:26+01:00" level=debug msg="Will call Factory.GetSvcScanner()" 
+time="2017-08-24T21:03:26+01:00" level=debug msg="After call Factory.GetSvcScanner()" 
+time="2017-08-24T21:03:26+01:00" level=debug msg="end wpwithin.Initialise()" 
+time="2017-08-24T21:03:26+01:00" level=debug msg="wp.callback not set, not setting handler in WPWithin." 
+time="2017-08-24T21:03:26+01:00" level=debug msg="End RPC.WPWithinHandler.Setup()" 
+time="2017-08-24T21:03:26+01:00" level=debug msg="Begin RPC.WPWithinHandler.GetDevice()" 
+time="2017-08-24T21:03:26+01:00" level=debug msg="Begin wpwithin.GetDevice()" 
+time="2017-08-24T21:03:26+01:00" level=debug msg="End wpwithin.GetDevice()" Device=&{b0397c23-5267-436c-4311-b0e26ccb0570 kevingwp-java-scanner Kevin Gordons Java DEVICE SCANNER map[] 192.168.1.22} 
+time="2017-08-24T21:03:26+01:00" level=debug msg="Found 0 services for device" 
+time="2017-08-24T21:03:26+01:00" level=debug msg="End RPC.WPWithinHandler.GetDevice()" 
+time="2017-08-24T21:03:26+01:00" level=debug msg="Begin RPC.WPWithinHandler.ServiceDiscovery()" 
+time="2017-08-24T21:03:26+01:00" level=debug msg="Begin wpwithin.DeviceDiscovery()" timeoutMillis=9000 
+time="2017-08-24T21:03:26+01:00" level=debug msg="Will call wp.core.SvcScanner.ScanForServices()" 
+time="2017-08-24T21:03:26+01:00" level=debug msg="Begin ScanForServices(timeout = 9000)" 
+time="2017-08-24T21:03:31+01:00" level=debug msg="Finish ScanForServices()" Found=1 Run=true Timed out=true 
+time="2017-08-24T21:03:31+01:00" level=debug msg="Did call wp.core.SvcScanner.ScanForServices()" Count devices=1 
+time="2017-08-24T21:03:31+01:00" level=info msg="Did find %d devices1" 
+time="2017-08-24T21:03:31+01:00" level=debug msg="After call wp.core.SvcScanner.ScanForService()" 
+time="2017-08-24T21:03:31+01:00" level=debug msg="End wpwithin.DeviceDiscovery()" Search result=[{Example WorldpayWithin producer 192.168.1.22 64521 b9e343f8-78dd-4037-590d-b35c1647cfd7  http://}] 
+time="2017-08-24T21:03:31+01:00" level=debug msg="Did receive message from 192.168.1.22:49489: {\"deviceDescription\":\"Example WorldpayWithin producer\",\"hostname\":\"192.168.1.22\",\"portNumber\":64521,\"serverID\":\"b9e343f8-78dd-4037-590d-b35c1647cfd7\",\"urlPrefix\":\"\",\"scheme\":\"http://\"}" 
+time="2017-08-24T21:03:31+01:00" level=info msg="Did decode broadcast message: types.BroadcastMessage{DeviceDescription:\"Example WorldpayWithin producer\", Hostname:\"192.168.1.22\", PortNumber:64521, ServerID:\"b9e343f8-78dd-4037-590d-b35c1647cfd7\", URLPrefix:\"\", Scheme:\"http://\"}" 
+time="2017-08-24T21:03:31+01:00" level=debug msg="End RPC.WPWithinHandler.ServiceDiscovery()" 
+time="2017-08-24T21:03:31+01:00" level=debug msg="RPC.WPWithinHandler.InitConsumer()" 
+time="2017-08-24T21:03:31+01:00" level=debug msg="Begin wpwithin.InitConsumer()" clientID=b0397c23-5267-436c-4311-b0e26ccb0570 hceCard="fname=Bilbo;lname=Baggins;expm=11;expy2018;num=***********4444;cvc=113;type=Card;" hostname=192.168.1.22 portnumber=64521 pspConfig=map[psp_name:worldpayonlinepayments api_endpoint:https://api.worldpay.com/v1] scheme="http://" urlPrefix= 
+time="2017-08-24T21:03:31+01:00" level=debug msg="is pspConfig parameter nil? false" 
+time="2017-08-24T21:03:31+01:00" level=debug msg="Will call Factory.GetPSPClient()" 
+time="2017-08-24T21:03:31+01:00" level=debug msg="After call Factory.GetPSPClient()" 
+time="2017-08-24T21:03:31+01:00" level=debug msg="Will call Factory.GetHTEClientHTTP()" 
+time="2017-08-24T21:03:31+01:00" level=debug msg="After call to Factory.GetHTEClientHTTP()" 
+time="2017-08-24T21:03:31+01:00" level=debug msg="Will call hte.NewClient" clientID=b0397c23-5267-436c-4311-b0e26ccb0570 hceCard="fname=Bilbo;lname=Baggins;expm=11;expy2018;num=***********4444;cvc=113;type=Card;" hostname=192.168.1.22 portnumber=64521 pspConfig=map[psp_name:worldpayonlinepayments api_endpoint:https://api.worldpay.com/v1] scheme="http://" urlPrefix= 
+time="2017-08-24T21:03:31+01:00" level=debug msg="After call hte.NewClient()" 
+time="2017-08-24T21:03:31+01:00" level=debug msg="End wpwithin.InitConsumer()" 
+time="2017-08-24T21:03:31+01:00" level=debug msg="Begin RPC.WPWithinHandler.RequestServices()" 
+time="2017-08-24T21:03:31+01:00" level=debug msg="begin wpwithin.RequestServices()" 
+time="2017-08-24T21:03:31+01:00" level=debug msg="Will call wp.core.HTEClient.DiscoverService()" 
+time="2017-08-24T21:03:31+01:00" level=debug msg="Did call wp.core.HTEClient.DiscoverService()" 
+time="2017-08-24T21:03:31+01:00" level=info msg="Did find 1 services." 
+time="2017-08-24T21:03:31+01:00" level=debug msg="end wpwithin.RequestServices()" Result=[{1 Can charge your hybrid / electric car Car charger}] 
+time="2017-08-24T21:03:31+01:00" level=debug msg="End RPC.WPWithinHandler.RequestServices()" 
+time="2017-08-24T21:03:31+01:00" level=debug msg="RPC.WPWithinHandler.GetServicePrices()" 
+time="2017-08-24T21:03:31+01:00" level=debug msg="Begin wpwithin.GetServicePrices()" ServiceID=1 
+time="2017-08-24T21:03:31+01:00" level=debug msg="Will call wp.core.HTEClient.GetPrices()" ServiceID=1 
+time="2017-08-24T21:03:31+01:00" level=debug msg="Did call wp.core.HTEClient.GetPrices()" 
+time="2017-08-24T21:03:31+01:00" level=info msg="Did find 1 prices for service id 1" 
+time="2017-08-24T21:03:31+01:00" level=debug msg="End wpwithin.GetServicePrices()" result=[{1 Kilowatt-hour 0xc4200c91c0 1 One kilowatt-hour}] 
+time="2017-08-24T21:03:31+01:00" level=debug msg="Begin RPC.WPWithinHandler.SelectService()" 
+time="2017-08-24T21:03:31+01:00" level=debug msg="Begin wpwithin.SelectService()" numberOfUnits=5 priceID=1 serviceID=1 
+time="2017-08-24T21:03:31+01:00" level=debug msg="Will call wp.core.HTEClient.NegotiatePrice()" 
+time="2017-08-24T21:03:31+01:00" level=debug msg="Did call wp.core.HTEClient.NegotiatePrice()" 
+time="2017-08-24T21:03:31+01:00" level=debug msg="End wpwithin.SelectService()" Error=<nil> totalPriceResponse={b9e343f8-78dd-4037-590d-b35c1647cfd7 b0397c23-5267-436c-4311-b0e26ccb0570 1 5 125 GBP 60af4556-f2dc-40fa-5dd0-e94985f58cc1 T_C_03eaa1d3-4642-4079-b030-b543ee04b5af} 
+time="2017-08-24T21:03:31+01:00" level=debug msg="End RPC.WPWithinHandler.SelectService()" 
+time="2017-08-24T21:03:31+01:00" level=debug msg="Begin RPC.WPWithinHandler.MakePayment()" 
+time="2017-08-24T21:03:31+01:00" level=debug msg="Finised converting thrift.TotalPriceResponse to go.TotalPriceResponse" 
+time="2017-08-24T21:03:31+01:00" level=debug msg="Proceeding to call MakePayment internally using converted request object" 
+time="2017-08-24T21:03:31+01:00" level=debug msg="Begin wpwithin.MakePayment()" TotalPriceResponse parameter={b9e343f8-78dd-4037-590d-b35c1647cfd7 b0397c23-5267-436c-4311-b0e26ccb0570 1 5 0 GBP 60af4556-f2dc-40fa-5dd0-e94985f58cc1 T_C_03eaa1d3-4642-4079-b030-b543ee04b5af} 
+time="2017-08-24T21:03:31+01:00" level=debug msg="Will call wp.core.Psp.GetToken()" HCE Card="fname=Bilbo;lname=Baggins;expm=11;expy2018;num=***********4444;cvc=113;type=Card;" Merchant client key="T_C_03eaa1d3-4642-4079-b030-b543ee04b5af" 
+time="2017-08-24T21:03:31+01:00" level=debug msg="begin onlineworldpay.GetToken()" 
+time="2017-08-24T21:03:31+01:00" level=debug msg="Attempt to marshal token request to JSON" 
+time="2017-08-24T21:03:31+01:00" level=debug msg="POST Request Token." Did marshal TokenRequest JSON="{\"reusable\":false,\"paymentMethod\":{\"name\":\"Bilbo Baggins\",\"expiryMonth\":11,\"expiryYear\":2018,\"issueNumber\":null,\"startMonth\":null,\"startYear\":null,\"cardNumber\":\"5555555555554444\",\"type\":\"Card\",\"cvc\":\"113\"},\"clientKey\":\"T_C_03eaa1d3-4642-4079-b030-b543ee04b5af\"}" 
+time="2017-08-24T21:03:31+01:00" level=debug msg="Sending Token POST request." RequestJSON="{\"reusable\":false,\"paymentMethod\":{\"name\":\"Bilbo Baggins\",\"expiryMonth\":11,\"expiryYear\":2018,\"issueNumber\":null,\"startMonth\":null,\"startYear\":null,\"cardNumber\":\"5555555555554444\",\"type\":\"Card\",\"cvc\":\"113\"},\"clientKey\":\"T_C_03eaa1d3-4642-4079-b030-b543ee04b5af\"}" Url="https://api.worldpay.com/v1/tokens" 
+time="2017-08-24T21:03:31+01:00" level=debug msg="Response status code" Code=200 
+time="2017-08-24T21:03:31+01:00" level=debug msg="Response body: {\"token\":\"TEST_SU_cf18c7da-a5a7-4db4-ba82-a8f3e44f8a9c\",\"paymentMethod\":{\"type\":\"ObfuscatedCard\",\"name\":\"Bilbo Baggins\",\"expiryMonth\":11,\"expiryYear\":2018,\"cardType\":\"MASTERCARD_CREDIT\",\"maskedCardNumber\":\"**** **** **** 4444\",\"cardSchemeType\":\"consumer\",\"cardSchemeName\":\"MCI CREDIT\",\"cardIssuer\":\"LLOYDS BANK PLC\",\"countryCode\":\"GB\",\"cardClass\":\"credit\",\"cardProductTypeDescNonContactless\":\"MasterCard Business\",\"cardProductTypeDescContactless\":\"CL MasterCard Bus\",\"prepaid\":\"unknown\"},\"reusable\":false}" 
+time="2017-08-24T21:03:31+01:00" level=debug msg="POST response code = HTTPOK, attempting to unmarshal and return" 
+time="2017-08-24T21:03:31+01:00" level=debug msg="Did call wp.core.Psp.GetToken() without error." Token="TEST_SU_cf18c7da-a5a7-4db4-ba82-a8f3e44f8a9c" 
+time="2017-08-24T21:03:31+01:00" level=debug msg="will call wp.core.HTEClient.MakeHtePayment()" Client ID=b0397c23-5267-436c-4311-b0e26ccb0570 Payment reference ID=60af4556-f2dc-40fa-5dd0-e94985f58cc1 token="TEST_SU_cf18c7da-a5a7-4db4-ba82-a8f3e44f8a9c" 
+time="2017-08-24T21:03:32+01:00" level=debug msg="Did call wp.core.HTEClient.MakeHtePayment() without error" 
+time="2017-08-24T21:03:32+01:00" level=debug msg="End wpwithin.MakePayment()" PaymentResponse={b9e343f8-78dd-4037-590d-b35c1647cfd7 b0397c23-5267-436c-4311-b0e26ccb0570 125 0xc420194000} 
+time="2017-08-24T21:03:32+01:00" level=debug msg="End RPC.WPWithinHandler.MakePayment()" 
+time="2017-08-24T21:03:32+01:00" level=debug msg="begin rpc.WPWithinHandler.BeginServiceDelivery()" serviceDeliveryToken=ServiceDeliveryToken({Key:60af4556-f2dc-40fa-5dd0-e94985f58cc1 Issued:2017-08-24T21:03:32Z Expiry:2017-08-31T21:03:32Z RefundOnExpiry:false Signature:[]}) serviceID=1 unitsToSupply=5 
+time="2017-08-24T21:03:32+01:00" level=debug msg="begin wpwithin.wpwithinimpl.BeginServiceDelivery()" serviceDeliveryToken="{Key:60af4556-f2dc-40fa-5dd0-e94985f58cc1 Issued:2017-08-24 21:03:32 +0000 UTC Expiry:2017-08-31 21:03:32 +0000 UTC RefundOnExpiry:false Signature:[]}" serviceID=1 unitsToSupply=5 
+time="2017-08-24T21:03:32+01:00" level=debug msg="Will call wp.core.HTEClient.StartDelivery()" 
+time="2017-08-24T21:03:32+01:00" level=debug msg="hte.clientImpl.StartDelivery()" serviceDeliveryToken={60af4556-f2dc-40fa-5dd0-e94985f58cc1 2017-08-24 21:03:32 +0000 UTC 2017-08-31 21:03:32 +0000 UTC false []} serviceId=1 unitsToSupply=5 
+time="2017-08-24T21:03:32+01:00" level=debug msg="end hte.clientImpl.EndDelivery()" 
+time="2017-08-24T21:03:32+01:00" level=debug msg="Did call wp.core.HTEClient.StartDelivery()" delivery response={b9e343f8-78dd-4037-590d-b35c1647cfd7 b0397c23-5267-436c-4311-b0e26ccb0570 {60af4556-f2dc-40fa-5dd0-e94985f58cc1 2017-08-24 21:03:32 +0000 UTC 2017-08-31 21:03:32 +0000 UTC false []} 5} 
+time="2017-08-24T21:03:32+01:00" level=debug msg="end wpwithin.wpwithinimpl.BeginServiceDelivery()" 
+time="2017-08-24T21:03:32+01:00" level=debug msg="end rpc.WPWithinHandler.BeginServiceDelivery()" 
+time="2017-08-24T21:03:36+01:00" level=debug msg="Finish ScanForServices()" Found=1 Run=true Timed out=true 
+time="2017-08-24T21:03:36+01:00" level=debug msg="Did call wp.core.SvcScanner.ScanForServices()" Count devices=1 
+time="2017-08-24T21:03:36+01:00" level=info msg="Did find %d devices1" 
+time="2017-08-24T21:03:36+01:00" level=debug msg="After call wp.core.SvcScanner.ScanForService()" 
+time="2017-08-24T21:03:36+01:00" level=debug msg="End wpwithin.DeviceDiscovery()" Search result=[{Example WorldpayWithin producer 192.168.1.22 64521 b9e343f8-78dd-4037-590d-b35c1647cfd7  http://}] 
+time="2017-08-24T21:03:36+01:00" level=debug msg="End RPC.WPWithinHandler.ServiceDiscovery()" 
+time="2017-08-24T21:03:36+01:00" level=debug msg="Begin RPC.WPWithinHandler.Setup()" 
+time="2017-08-24T21:03:36+01:00" level=debug msg="begin wpwithin.Initialise()" description="Kevin Gordons Java DEVICE SCANNER" name=kevingwp-java-scanner 
+time="2017-08-24T21:03:36+01:00" level=debug msg="Will perform parameter validation" 
+time="2017-08-24T21:03:36+01:00" level=debug msg="Parameter validation passed" 
+time="2017-08-24T21:03:36+01:00" level=debug msg="Will create new core.Core" 
+time="2017-08-24T21:03:36+01:00" level=debug msg="Did create new core.Core" 
+time="2017-08-24T21:03:36+01:00" level=error msg="Unable to load configuration file wpwconfig.json" Error="open wpwconfig.json: no such file or directory" 
+time="2017-08-24T21:03:36+01:00" level=debug msg="Will call doWebSocketLogSetup()" 
+time="2017-08-24T21:03:36+01:00" level=debug msg="Begin wpwithin.doWebSocketLogSetup()" Configuration={false 0 } 
+time="2017-08-24T21:03:36+01:00" level=debug msg="Config.WSLogEnable is false -- didn't setup WS Logger" 
+time="2017-08-24T21:03:36+01:00" level=debug msg="End doWebSocketLogSetup()" 
+time="2017-08-24T21:03:36+01:00" level=debug msg="After call doWebSocketLogSetup()" 
+time="2017-08-24T21:03:36+01:00" level=debug msg="Will call Factory.GetDevice()" description="Kevin Gordons Java DEVICE SCANNER" name=kevingwp-java-scanner 
+time="2017-08-24T21:03:36+01:00" level=debug msg="Will call Factory.GetOrderManager()" 
+time="2017-08-24T21:03:36+01:00" level=debug msg="After call Factory.GetOrderManager()" 
+time="2017-08-24T21:03:36+01:00" level=debug msg="Will call Factory.GetSvcBroadcaster()" 
+time="2017-08-24T21:03:36+01:00" level=debug msg="After call Factory.GetSvcBroadcaster()" 
+time="2017-08-24T21:03:36+01:00" level=debug msg="Will call Factory.GetSvcScanner()" 
+time="2017-08-24T21:03:36+01:00" level=debug msg="After call Factory.GetSvcScanner()" 
+time="2017-08-24T21:03:36+01:00" level=debug msg="end wpwithin.Initialise()" 
+time="2017-08-24T21:03:36+01:00" level=debug msg="wp.callback not set, not setting handler in WPWithin." 
+time="2017-08-24T21:03:36+01:00" level=debug msg="End RPC.WPWithinHandler.Setup()" 
+time="2017-08-24T21:03:36+01:00" level=debug msg="Begin RPC.WPWithinHandler.GetDevice()" 
+time="2017-08-24T21:03:36+01:00" level=debug msg="Begin wpwithin.GetDevice()" 
+time="2017-08-24T21:03:36+01:00" level=debug msg="End wpwithin.GetDevice()" Device=&{b0397c23-5267-436c-4311-b0e26ccb0570 kevingwp-java-scanner Kevin Gordons Java DEVICE SCANNER map[] 192.168.1.22} 
+time="2017-08-24T21:03:36+01:00" level=debug msg="Found 0 services for device" 
+time="2017-08-24T21:03:36+01:00" level=debug msg="End RPC.WPWithinHandler.GetDevice()" 
+time="2017-08-24T21:03:36+01:00" level=debug msg="Begin RPC.WPWithinHandler.ServiceDiscovery()" 
+time="2017-08-24T21:03:36+01:00" level=debug msg="Begin wpwithin.DeviceDiscovery()" timeoutMillis=9000 
+time="2017-08-24T21:03:36+01:00" level=debug msg="Will call wp.core.SvcScanner.ScanForServices()" 
+time="2017-08-24T21:03:36+01:00" level=debug msg="Begin ScanForServices(timeout = 9000)" 
+time="2017-08-24T21:03:41+01:00" level=debug msg="Did receive message from 192.168.1.22:52804: {\"deviceDescription\":\"Example WorldpayWithin producer\",\"hostname\":\"192.168.1.22\",\"portNumber\":64521,\"serverID\":\"b9e343f8-78dd-4037-590d-b35c1647cfd7\",\"urlPrefix\":\"\",\"scheme\":\"http://\"}" 
+time="2017-08-24T21:03:41+01:00" level=info msg="Did decode broadcast message: types.BroadcastMessage{DeviceDescription:\"Example WorldpayWithin producer\", Hostname:\"192.168.1.22\", PortNumber:64521, ServerID:\"b9e343f8-78dd-4037-590d-b35c1647cfd7\", URLPrefix:\"\", Scheme:\"http://\"}" 
+time="2017-08-24T21:03:42+01:00" level=debug msg="begin rpc.WPWithinHandler.EndServiceDelivery()" serviceDeliveryToken=ServiceDeliveryToken({Key:60af4556-f2dc-40fa-5dd0-e94985f58cc1 Issued:2017-08-24T21:03:32Z Expiry:2017-08-31T21:03:32Z RefundOnExpiry:false Signature:[]}) serviceID=1 unitsReceived=5 
+time="2017-08-24T21:03:42+01:00" level=debug msg="begin wpwithin.wpwithinimpl.EndServiceDelivery()" serviceDeliveryToken="{Key:60af4556-f2dc-40fa-5dd0-e94985f58cc1 Issued:2017-08-24 21:03:32 +0000 UTC Expiry:2017-08-31 21:03:32 +0000 UTC RefundOnExpiry:false Signature:[]}" serviceID=1 unitsReceived=5 
+time="2017-08-24T21:03:42+01:00" level=debug msg="Will call wp.core.HTEClient.EndDelivery()" 
+time="2017-08-24T21:03:42+01:00" level=error msg="Recover: WPWithin.EndServiceDelivery()" panic_message="runtime error: invalid memory address or nil pointer dereference" serviceDeliveryToken="{Key:60af4556-f2dc-40fa-5dd0-e94985f58cc1 Issued:2017-08-24 21:03:32 +0000 UTC Expiry:2017-08-31 21:03:32 +0000 UTC RefundOnExpiry:false Signature:[]}" serviceID=1 stack="goroutine 6 [running]:\nruntime/debug.Stack(0x45b86a, 0x3, 0xc42021d440)\n\t/usr/local/go/src/runtime/debug/stack.go:24 +0x79\ngithub.com/wptechinnovation/worldpay-within-sdk/sdkcore/wpwithin.(*wpWithinImpl).EndServiceDelivery.func1(0x1, 0x5, 0xc420335da0, 0x24, 0xed1313624, 0x0, 0x664940, 0xed13a70a4, 0x0, 0x664940, ...)\n\t/Users/conor/Repositories/GoLang/src/github.com/wptechinnovation/worldpay-within-sdk/sdkcore/wpwithin/wpwithin.go:750 +0x213\npanic(0x3efd60, 0xc420010090)\n\t/usr/local/go/src/runtime/panic.go:458 +0x243\ngithub.com/wptechinnovation/worldpay-within-sdk/sdkcore/wpwithin.(*wpWithinImpl).EndServiceDelivery(0xc4201360f8, 0x1, 0xc420335da0, 0x24, 0xed1313624, 0x0, 0x664940, 0xed13a70a4, 0x0, 0x664940, ...)\n\t/Users/conor/Repositories/GoLang/src/github.com/wptechinnovation/worldpay-within-sdk/sdkcore/wpwithin/wpwithin.go:756 +0x50b\ngithub.com/wptechinnovation/worldpay-within-sdk/sdkcore/wpwithin/rpc.(*WPWithinHandler).EndServiceDelivery(0xc42013aca0, 0xc400000001, 0xc420396140, 0x5, 0x0, 0x0, 0x0)\n\t/Users/conor/Repositories/GoLang/src/github.com/wptechinnovation/worldpay-within-sdk/sdkcore/wpwithin/rpc/wpwithinhandler.go:449 +0x583\ngithub.com/wptechinnovation/worldpay-within-sdk/sdkcore/wpwithin/rpc/wpthrift/gen-go/wpthrift.(*wPWithinProcessorEndServiceDelivery).Process(0xc420139380, 0xc40000000a, 0x64f8c0, 0xc42008e6c0, 0x64f8c0, 0xc42008e750, 0x169701, 0x0, 0x0)\n\t/Users/conor/Repositories/GoLang/src/github.com/wptechinnovation/worldpay-within-sdk/sdkcore/wpwithin/rpc/wpthrift/gen-go/wpthrift/wpwithin.go:2102 +0x2de\ngithub.com/wptechinnovation/worldpay-within-sdk/sdkcore/wpwithin/rpc/wpthrift/gen-go/wpthrift.(*WPWithinProcessor).Process(0xc42013ad60, 0x64f8c0, 0xc42008e6c0, 0x64f8c0, 0xc42008e750, 0x1, 0x0, 0x0)\n\t/Users/conor/Repositories/GoLang/src/github.com/wptechinnovation/worldpay-within-sdk/sdkcore/wpwithin/rpc/wpthrift/gen-go/wpthrift/wpwithin.go:1353 +0x123\ngit.apache.org/thrift.git/lib/go/thrift.(*TSimpleServer).processRequests(0xc420148930, 0x64c040, 0xc4200178f0, 0x0, 0x0)\n\t/Users/conor/Repositories/GoLang/src/git.apache.org/thrift.git/lib/go/thrift/simple_server.go:181 +0x27a\ngit.apache.org/thrift.git/lib/go/thrift.(*TSimpleServer).AcceptLoop.func1(0xc420148930, 0x64c040, 0xc4200178f0)\n\t/Users/conor/Repositories/GoLang/src/git.apache.org/thrift.git/lib/go/thrift/simple_server.go:135 +0x49\ncreated by git.apache.org/thrift.git/lib/go/thrift.(*TSimpleServer).AcceptLoop\n\t/Users/conor/Repositories/GoLang/src/git.apache.org/thrift.git/lib/go/thrift/simple_server.go:138 +0x8e\n" unitsReceived=5 
+time="2017-08-24T21:03:42+01:00" level=debug msg="end rpc.WPWithinHandler.EndServiceDelivery()" 
+time="2017-08-24T21:03:46+01:00" level=debug msg="Did receive message from 192.168.1.22:62218: {\"deviceDescription\":\"Example WorldpayWithin producer\",\"hostname\":\"192.168.1.22\",\"portNumber\":64521,\"serverID\":\"b9e343f8-78dd-4037-590d-b35c1647cfd7\",\"urlPrefix\":\"\",\"scheme\":\"http://\"}" 
+time="2017-08-24T21:03:46+01:00" level=info msg="Did decode broadcast message: types.BroadcastMessage{DeviceDescription:\"Example WorldpayWithin producer\", Hostname:\"192.168.1.22\", PortNumber:64521, ServerID:\"b9e343f8-78dd-4037-590d-b35c1647cfd7\", URLPrefix:\"\", Scheme:\"http://\"}" 
+time="2017-08-24T21:03:46+01:00" level=debug msg="Finish ScanForServices()" Found=1 Run=true Timed out=true 
+time="2017-08-24T21:03:46+01:00" level=debug msg="Did call wp.core.SvcScanner.ScanForServices()" Count devices=1 
+time="2017-08-24T21:03:46+01:00" level=info msg="Did find %d devices1" 
+time="2017-08-24T21:03:46+01:00" level=debug msg="After call wp.core.SvcScanner.ScanForService()" 
+time="2017-08-24T21:03:46+01:00" level=debug msg="End wpwithin.DeviceDiscovery()" Search result=[{Example WorldpayWithin producer 192.168.1.22 64521 b9e343f8-78dd-4037-590d-b35c1647cfd7  http://}] 
+time="2017-08-24T21:03:46+01:00" level=debug msg="End RPC.WPWithinHandler.ServiceDiscovery()" 
+time="2017-08-24T21:03:46+01:00" level=debug msg="Begin RPC.WPWithinHandler.Setup()" 
+time="2017-08-24T21:03:46+01:00" level=debug msg="begin wpwithin.Initialise()" description="Kevin Gordons Java DEVICE SCANNER" name=kevingwp-java-scanner 
+time="2017-08-24T21:03:46+01:00" level=debug msg="Will perform parameter validation" 
+time="2017-08-24T21:03:46+01:00" level=debug msg="Parameter validation passed" 
+time="2017-08-24T21:03:46+01:00" level=debug msg="Will create new core.Core" 
+time="2017-08-24T21:03:46+01:00" level=debug msg="Did create new core.Core" 
+time="2017-08-24T21:03:46+01:00" level=error msg="Unable to load configuration file wpwconfig.json" Error="open wpwconfig.json: no such file or directory" 
+time="2017-08-24T21:03:46+01:00" level=debug msg="Will call doWebSocketLogSetup()" 
+time="2017-08-24T21:03:46+01:00" level=debug msg="Begin wpwithin.doWebSocketLogSetup()" Configuration={false 0 } 
+time="2017-08-24T21:03:46+01:00" level=debug msg="Config.WSLogEnable is false -- didn't setup WS Logger" 
+time="2017-08-24T21:03:46+01:00" level=debug msg="End doWebSocketLogSetup()" 
+time="2017-08-24T21:03:46+01:00" level=debug msg="After call doWebSocketLogSetup()" 
+time="2017-08-24T21:03:46+01:00" level=debug msg="Will call Factory.GetDevice()" description="Kevin Gordons Java DEVICE SCANNER" name=kevingwp-java-scanner 
+time="2017-08-24T21:03:46+01:00" level=debug msg="Will call Factory.GetOrderManager()" 
+time="2017-08-24T21:03:46+01:00" level=debug msg="After call Factory.GetOrderManager()" 
+time="2017-08-24T21:03:46+01:00" level=debug msg="Will call Factory.GetSvcBroadcaster()" 
+time="2017-08-24T21:03:46+01:00" level=debug msg="After call Factory.GetSvcBroadcaster()" 
+time="2017-08-24T21:03:46+01:00" level=debug msg="Will call Factory.GetSvcScanner()" 
+time="2017-08-24T21:03:46+01:00" level=debug msg="After call Factory.GetSvcScanner()" 
+time="2017-08-24T21:03:46+01:00" level=debug msg="end wpwithin.Initialise()" 
+time="2017-08-24T21:03:46+01:00" level=debug msg="wp.callback not set, not setting handler in WPWithin." 
+time="2017-08-24T21:03:46+01:00" level=debug msg="End RPC.WPWithinHandler.Setup()" 
+time="2017-08-24T21:03:46+01:00" level=debug msg="Begin RPC.WPWithinHandler.GetDevice()" 
+time="2017-08-24T21:03:46+01:00" level=debug msg="Begin wpwithin.GetDevice()" 
+time="2017-08-24T21:03:46+01:00" level=debug msg="End wpwithin.GetDevice()" Device=&{b0397c23-5267-436c-4311-b0e26ccb0570 kevingwp-java-scanner Kevin Gordons Java DEVICE SCANNER map[] 192.168.1.22} 
+time="2017-08-24T21:03:46+01:00" level=debug msg="Found 0 services for device" 
+time="2017-08-24T21:03:46+01:00" level=debug msg="End RPC.WPWithinHandler.GetDevice()" 
+time="2017-08-24T21:03:46+01:00" level=debug msg="Begin RPC.WPWithinHandler.ServiceDiscovery()" 
+time="2017-08-24T21:03:46+01:00" level=debug msg="Begin wpwithin.DeviceDiscovery()" timeoutMillis=9000 
+time="2017-08-24T21:03:46+01:00" level=debug msg="Will call wp.core.SvcScanner.ScanForServices()" 
+time="2017-08-24T21:03:46+01:00" level=debug msg="Begin ScanForServices(timeout = 9000)" 
+time="2017-08-24T21:03:51+01:00" level=debug msg="Did receive message from 192.168.1.22:63762: {\"deviceDescription\":\"Example WorldpayWithin producer\",\"hostname\":\"192.168.1.22\",\"portNumber\":64521,\"serverID\":\"b9e343f8-78dd-4037-590d-b35c1647cfd7\",\"urlPrefix\":\"\",\"scheme\":\"http://\"}" 
+time="2017-08-24T21:03:51+01:00" level=info msg="Did decode broadcast message: types.BroadcastMessage{DeviceDescription:\"Example WorldpayWithin producer\", Hostname:\"192.168.1.22\", PortNumber:64521, ServerID:\"b9e343f8-78dd-4037-590d-b35c1647cfd7\", URLPrefix:\"\", Scheme:\"http://\"}" 
+time="2017-08-24T21:03:56+01:00" level=debug msg="Finish ScanForServices()" Found=1 Run=true Timed out=true 
