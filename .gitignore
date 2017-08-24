@@ -1,3 +1,5 @@
 .DS_Store
 /library/netbeans-project/WPW-java/build/
 /library/netbeans-project/WPW-java/dist/
+/applications/netbeans-projects/DeviceScanner/nbproject/private/
+/applications/netbeans-projects/DeviceScanner/build/
