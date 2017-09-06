@@ -14,6 +14,7 @@ import com.worldpay.innovation.wpwithin.types.WWServiceDetails;
 import com.worldpay.innovation.wpwithin.types.WWServiceMessage;
 import com.worldpay.innovation.wpwithin.types.WWTotalPriceResponse;
 
+import java.net.SocketException;
 import java.util.Map;
 import java.util.Set;
 
@@ -190,6 +191,10 @@ public interface WPWithinWrapper {
      * @throws WPWithinGeneralException
      */
     public WWServiceDeliveryToken endServiceDelivery(int serviceID, WWServiceDeliveryToken serviceDeliveryToken, Integer unitsReceived) throws WPWithinGeneralException;
-
-    void stopRPCAgent();
-}
+    
+    /**
+     * Closes the RPC agent gracefully, or kills it if it does not work.
+     */
+    public void stopRPCAgent() throws WPWithinGeneralException;
+    
+    }

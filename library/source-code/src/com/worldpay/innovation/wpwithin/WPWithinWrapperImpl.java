@@ -5,13 +5,13 @@
  */
 package com.worldpay.innovation.wpwithin;
 
-import com.worldpay.innovation.wpwithin.eventlistener.EventListener;
-import com.worldpay.innovation.wpwithin.eventlistener.EventServer;
-import com.worldpay.innovation.wpwithin.rpc.WPWithin;
-import com.worldpay.innovation.wpwithin.rpc.launcher.*;
-import com.worldpay.innovation.wpwithin.rpc.types.ServiceDeliveryToken;
-import com.worldpay.innovation.wpwithin.thriftadapter.*;
-import com.worldpay.innovation.wpwithin.types.*;
+import java.net.SocketException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import org.apache.thrift.TException;
 import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.protocol.TProtocol;
@@ -19,15 +19,33 @@ import org.apache.thrift.transport.TSocket;
 import org.apache.thrift.transport.TTransport;
 import org.apache.thrift.transport.TTransportException;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import com.worldpay.innovation.wpwithin.eventlistener.EventListener;
+import com.worldpay.innovation.wpwithin.eventlistener.EventServer;
+import com.worldpay.innovation.wpwithin.rpc.WPWithin;
+import com.worldpay.innovation.wpwithin.rpc.launcher.Architecture;
+import com.worldpay.innovation.wpwithin.rpc.launcher.Launcher;
+import com.worldpay.innovation.wpwithin.rpc.launcher.Listener;
+import com.worldpay.innovation.wpwithin.rpc.launcher.OS;
+import com.worldpay.innovation.wpwithin.rpc.launcher.PlatformConfig;
+import com.worldpay.innovation.wpwithin.rpc.types.ServiceDeliveryToken;
+import com.worldpay.innovation.wpwithin.thriftadapter.DeviceAdapter;
+import com.worldpay.innovation.wpwithin.thriftadapter.HCECardAdapter;
+import com.worldpay.innovation.wpwithin.thriftadapter.PaymentResponseAdapter;
+import com.worldpay.innovation.wpwithin.thriftadapter.PriceAdapter;
+import com.worldpay.innovation.wpwithin.thriftadapter.ServiceAdapter;
+import com.worldpay.innovation.wpwithin.thriftadapter.ServiceDeliveryTokenAdapter;
+import com.worldpay.innovation.wpwithin.thriftadapter.ServiceDetailsAdapter;
+import com.worldpay.innovation.wpwithin.thriftadapter.ServiceMessageAdapter;
+import com.worldpay.innovation.wpwithin.thriftadapter.TotalPriceResponseAdapter;
+import com.worldpay.innovation.wpwithin.types.WWDevice;
+import com.worldpay.innovation.wpwithin.types.WWHCECard;
+import com.worldpay.innovation.wpwithin.types.WWPaymentResponse;
+import com.worldpay.innovation.wpwithin.types.WWPrice;
+import com.worldpay.innovation.wpwithin.types.WWService;
+import com.worldpay.innovation.wpwithin.types.WWServiceDeliveryToken;
+import com.worldpay.innovation.wpwithin.types.WWServiceDetails;
+import com.worldpay.innovation.wpwithin.types.WWServiceMessage;
+import com.worldpay.innovation.wpwithin.types.WWTotalPriceResponse;
 
 /**
  *
@@ -35,284 +53,339 @@ import java.util.logging.Logger;
  */
 public class WPWithinWrapperImpl implements WPWithinWrapper {
 
-    private static final Logger log = Logger.getLogger(WPWithinWrapperImpl.class.getName());
+	private static final Logger log = Logger.getLogger(WPWithinWrapperImpl.class.getName());
 
-    private String hostConfig;
-    private Integer portConfig;
-    private WPWithin.Client cachedClient;
-    private EventServer eventServer;
-    private Launcher launcher;
+	private String hostConfig;
+	private Integer portConfig;
+	private WPWithin.Client cachedClient;
+	private EventServer eventServer;
+	private Launcher launcher;
 
-    public WPWithinWrapperImpl(String host, Integer port, boolean startRPCAgent, Listener launcherListener) {
+	public WPWithinWrapperImpl(String host, Integer port, boolean startRPCAgent, Listener launcherListener) {
+		this(host, port, startRPCAgent, null, 0, launcherListener);
 
-        this(host, port, startRPCAgent, null, 0, launcherListener);
-    }
+	}
 
-    public WPWithinWrapperImpl(String rpcHost, Integer rpcPort, boolean startRPCAgent, EventListener eventListener, int rpcCallbackPort, Listener launcherListener){
+	public WPWithinWrapperImpl(String rpcHost, Integer rpcPort, boolean startRPCAgent, EventListener eventListener,
+			int rpcCallbackPort, Listener launcherListener) {
+		shutdownOnSigterm();
+		this.hostConfig = rpcHost;
+		this.portConfig = rpcPort;
+		if (eventListener != null) {
 
-        this.hostConfig = rpcHost;
-        this.portConfig = rpcPort;
+			if (rpcCallbackPort <= 0 || rpcCallbackPort > 65535) {
 
-        if(eventListener != null) {
+				throw new WPWithinGeneralException("Callback port must be >0 and <65535");
+			}
 
-            if(rpcCallbackPort <= 0 || rpcCallbackPort > 65535) {
+			eventServer = new EventServer();
 
-                throw new WPWithinGeneralException("Callback port must be >0 and <65535");
-            }
+			eventServer.start(eventListener, rpcCallbackPort);
 
-            eventServer = new EventServer();
+			System.out.printf("Did setup and start event server on port: %d\n", rpcCallbackPort);
+		} else {
 
-            eventServer.start(eventListener, rpcCallbackPort);
+			rpcCallbackPort = 0;
+		}
 
-            System.out.printf("Did setup and start event server on port: %d\n", rpcCallbackPort);
-        } else {
+		if (startRPCAgent) {
 
-            rpcCallbackPort = 0;
-        }
+			startRPCAgent(rpcPort, rpcCallbackPort, launcherListener);
+		}
 
-        if(startRPCAgent) {
+		setClientIfNotSet();
+	}
 
-            startRPCAgent(rpcPort, rpcCallbackPort, launcherListener);
-        }
+	private void setClientIfNotSet() {
+		if (this.cachedClient == null) {
+			this.cachedClient = openRpcListener();
+		}
+	}
 
-        setClientIfNotSet();
-    }
-    
-    private void setClientIfNotSet() {
-        if(this.cachedClient == null) {
-            this.cachedClient = openRpcListener();
-        }        
-    }
-    
-    private WPWithin.Client getClient() {
-       setClientIfNotSet();
-       return this.cachedClient;
-    }
+	private void shutdownOnSigterm() {
+		Runtime.getRuntime().addShutdownHook(new Thread() {
+			@Override
+			public void run() {
+				stopRPCAgent();
+			}
+		});
+	}
 
-    private WPWithin.Client openRpcListener() {
+	private WPWithin.Client getClient() {
+		setClientIfNotSet();
+		return this.cachedClient;
+	}
 
-        TTransport transport = new TSocket(hostConfig, portConfig);
+	private WPWithin.Client openRpcListener() {
 
-        try {
-            transport.open();
-        } catch (TTransportException ex) {
-            Logger.getLogger(WPWithinWrapperImpl.class.getName()).log(Level.SEVERE, "Could not open transport socket", ex);
-        }
+		TTransport transport = new TSocket(hostConfig, portConfig);
 
-        TProtocol protocol = new TBinaryProtocol(transport);
-        WPWithin.Client client = new WPWithin.Client(protocol);
+		try {
+			transport.open();
+		} catch (TTransportException ex) {
+			Logger.getLogger(WPWithinWrapperImpl.class.getName()).log(Level.SEVERE, "Could not open transport socket",
+					ex);
+		}
 
-        return client;
-    }
+		TProtocol protocol = new TBinaryProtocol(transport);
+		WPWithin.Client client = new WPWithin.Client(protocol);
 
-    @Override
-    public void setup(String name, String description) throws WPWithinGeneralException {
+		return client;
+	}
 
-        try {
-            getClient().setup(name, description);
-        } catch (TException ex) {
-            Logger.getLogger(WPWithinWrapperImpl.class.getName()).log(Level.SEVERE, "Failure to setup in the wrapper", ex);
-            throw new WPWithinGeneralException("Failure to setup in the wrapper");
-        }
-    }
+	@Override
+	public void setup(String name, String description) throws WPWithinGeneralException {
 
-    @Override
-    public void addService(WWService theService) throws WPWithinGeneralException {
+		try {
+			getClient().setup(name, description);
+		} catch (TException ex) {
+			Logger.getLogger(WPWithinWrapperImpl.class.getName()).log(Level.SEVERE, "Failure to setup in the wrapper",
+					ex);
+			throw new WPWithinGeneralException("Failure to setup in the wrapper");
+		}
+	}
 
-        Logger.getLogger(WPWithinWrapperImpl.class.getName()).log(Level.INFO, "About to add service");
-        try {
-            getClient().addService(ServiceAdapter.convertWWService(theService));
-        } catch(TException ex) {
-            throw new WPWithinGeneralException("Add service to producer failed with Rpc call to the SDK lower level");
-        }
-        Logger.getLogger(WPWithinWrapperImpl.class.getName()).log(Level.INFO, "Should have successfully added service");
+	@Override
+	public void addService(WWService theService) throws WPWithinGeneralException {
 
-    }
+		Logger.getLogger(WPWithinWrapperImpl.class.getName()).log(Level.INFO, "About to add service");
+		try {
+			getClient().addService(ServiceAdapter.convertWWService(theService));
+		} catch (TException ex) {
+			throw new WPWithinGeneralException("Add service to producer failed with Rpc call to the SDK lower level");
+		}
+		Logger.getLogger(WPWithinWrapperImpl.class.getName()).log(Level.INFO, "Should have successfully added service");
 
-    @Override
-    public void removeService(WWService svc) throws WPWithinGeneralException {
-        try {
-            getClient().removeService(ServiceAdapter.convertWWService(svc));
-        } catch (TException ex) {
-            Logger.getLogger(WPWithinWrapperImpl.class.getName()).log(Level.SEVERE, "Removal of service failed in the wrapper", ex);
-            throw new WPWithinGeneralException("Removal of service failed in the wrapper");
-        }
-    }
+	}
 
-    @Override
-    public void initConsumer(String scheme, String hostname, Integer port, String urlPrefix, String serverId, WWHCECard hceCard, Map<String, String> pspConfig) throws WPWithinGeneralException {
-        try {
-            getClient().initConsumer(scheme, hostname, port, urlPrefix, serverId, HCECardAdapter.convertWWHCECard(hceCard), pspConfig);
-        } catch (TException ex) {
-            Logger.getLogger(WPWithinWrapperImpl.class.getName()).log(Level.SEVERE, "Initiating the consumer failed in the wrapper", ex);
-            throw new WPWithinGeneralException("Initiating the consumer failed in the wrapper");
-        }
-    }
+	@Override
+	public void removeService(WWService svc) throws WPWithinGeneralException {
+		try {
+			getClient().removeService(ServiceAdapter.convertWWService(svc));
+		} catch (TException ex) {
+			Logger.getLogger(WPWithinWrapperImpl.class.getName()).log(Level.SEVERE,
+					"Removal of service failed in the wrapper", ex);
+			throw new WPWithinGeneralException("Removal of service failed in the wrapper");
+		}
+	}
 
-    @Override
-    public void initProducer(Map<String, String> pspConfig) throws WPWithinGeneralException {
-        try {
-            getClient().initProducer(pspConfig);
-        } catch (TException ex) {
-            Logger.getLogger(WPWithinWrapperImpl.class.getName()).log(Level.SEVERE, "Initiating the producer failed in the wrapper", ex);
-            throw new WPWithinGeneralException("Initiating the producer failed in the wrapper");
-        }
-    }
+	@Override
+	public void initConsumer(String scheme, String hostname, Integer port, String urlPrefix, String serverId,
+			WWHCECard hceCard, Map<String, String> pspConfig) throws WPWithinGeneralException {
+		try {
+			getClient().initConsumer(scheme, hostname, port, urlPrefix, serverId,
+					HCECardAdapter.convertWWHCECard(hceCard), pspConfig);
+		} catch (TException ex) {
+			Logger.getLogger(WPWithinWrapperImpl.class.getName()).log(Level.SEVERE,
+					"Initiating the consumer failed in the wrapper", ex);
+			throw new WPWithinGeneralException("Initiating the consumer failed in the wrapper");
+		}
+	}
 
-    @Override
-    public WWDevice getDevice() throws WPWithinGeneralException {
-        try {
-            return DeviceAdapter.convertDevice(getClient().getDevice());
-        } catch (TException ex) {
-            Logger.getLogger(WPWithinWrapperImpl.class.getName()).log(Level.SEVERE, "Get device in wrapper failed", ex);
-            throw new WPWithinGeneralException("Get device in wrapper failed");
-        }
-    }
+	@Override
+	public void initProducer(Map<String, String> pspConfig) throws WPWithinGeneralException {
+		try {
+			getClient().initProducer(pspConfig);
+		} catch (TException ex) {
+			Logger.getLogger(WPWithinWrapperImpl.class.getName()).log(Level.SEVERE,
+					"Initiating the producer failed in the wrapper", ex);
+			throw new WPWithinGeneralException("Initiating the producer failed in the wrapper");
+		}
+	}
 
-    @Override
-    public void startServiceBroadcast(Integer timeoutMillis) throws WPWithinGeneralException {
-        try {
-            getClient().startServiceBroadcast(timeoutMillis);
-        } catch (TException ex) {
-            Logger.getLogger(WPWithinWrapperImpl.class.getName()).log(Level.SEVERE, "Start service broadcast in wrapper failed", ex);
-            throw new WPWithinGeneralException("Start service broadcast in wrapper failed");
-        }
-    }
+	@Override
+	public WWDevice getDevice() throws WPWithinGeneralException {
+		try {
+			return DeviceAdapter.convertDevice(getClient().getDevice());
+		} catch (TException ex) {
+			Logger.getLogger(WPWithinWrapperImpl.class.getName()).log(Level.SEVERE, "Get device in wrapper failed", ex);
+			throw new WPWithinGeneralException("Get device in wrapper failed");
+		}
+	}
 
-    @Override
-    public void stopServiceBroadcast() throws WPWithinGeneralException {
-        try {
-            getClient().stopServiceBroadcast();
-        } catch (TException ex) {
-            Logger.getLogger(WPWithinWrapperImpl.class.getName()).log(Level.SEVERE, "Stop service broadcast failed", ex);
-            throw new WPWithinGeneralException("Stop service broadcast failed");
-        }
-    }
+	@Override
+	public void startServiceBroadcast(Integer timeoutMillis) throws WPWithinGeneralException {
+		try {
+			getClient().startServiceBroadcast(timeoutMillis);
+		} catch (TException ex) {
+			Logger.getLogger(WPWithinWrapperImpl.class.getName()).log(Level.SEVERE,
+					"Start service broadcast in wrapper failed", ex);
+			throw new WPWithinGeneralException("Start service broadcast in wrapper failed");
+		}
+	}
 
-    @Override
-    public Set<WWServiceMessage> deviceDiscovery(Integer timeoutMillis) throws WPWithinGeneralException {
-        try {
-            return ServiceMessageAdapter.convertServiceMessages(getClient().deviceDiscovery(timeoutMillis));
-        } catch (TException ex) {
-            Logger.getLogger(WPWithinWrapperImpl.class.getName()).log(Level.SEVERE, "Failed device discovery in wrapper", ex);
-            throw new WPWithinGeneralException("Failed device discovery in wrapper");
-        }
-    }
+	@Override
+	public void stopServiceBroadcast() throws WPWithinGeneralException {
+		try {
+			getClient().stopServiceBroadcast();
+		} catch (TException ex) {
+			Logger.getLogger(WPWithinWrapperImpl.class.getName()).log(Level.SEVERE, "Stop service broadcast failed",
+					ex);
+			throw new WPWithinGeneralException("Stop service broadcast failed");
+		}
+	}
 
-    @Override
-    public Set<WWServiceDetails> requestServices() throws WPWithinGeneralException {
-            
-        try {
-            return ServiceDetailsAdapter.convertServiceDetails(getClient().requestServices());
-        } catch (TException ex) {
-            Logger.getLogger(WPWithinWrapperImpl.class.getName()).log(Level.SEVERE, "Request Services failed in wrapper", ex);
-            throw new WPWithinGeneralException("Request Services failed in wrapper");
-        }
+	@Override
+	public Set<WWServiceMessage> deviceDiscovery(Integer timeoutMillis) throws WPWithinGeneralException {
+		try {
+			return ServiceMessageAdapter.convertServiceMessages(getClient().deviceDiscovery(timeoutMillis));
+		} catch (TException ex) {
+			Logger.getLogger(WPWithinWrapperImpl.class.getName()).log(Level.SEVERE,
+					"Failed device discovery in wrapper", ex);
+			throw new WPWithinGeneralException("Failed device discovery in wrapper");
+		}
+	}
 
-    }
+	@Override
+	public Set<WWServiceDetails> requestServices() throws WPWithinGeneralException {
 
-    @Override
-    public Set<WWPrice> getServicePrices(Integer serviceId) throws WPWithinGeneralException {
-        try {
-            return PriceAdapter.convertServicePrices(getClient().getServicePrices(serviceId));
-        } catch (TException ex) {
-            Logger.getLogger(WPWithinWrapperImpl.class.getName()).log(Level.SEVERE, "Get Service Prices failed in wrapper", ex);
-            throw new WPWithinGeneralException("Get Service Prices failed in wrapper");
-        }
-    }
-    
-    @Override
-    public WWTotalPriceResponse selectService(Integer serviceId, Integer numberOfUnits, Integer priceId) throws WPWithinGeneralException {
-        try {
-            return TotalPriceResponseAdapter.convertTotalPriceResponse(getClient().selectService(serviceId, numberOfUnits, priceId));
-        } catch (TException ex) {
-            Logger.getLogger(WPWithinWrapperImpl.class.getName()).log(Level.SEVERE, "Select service failed in wrapper", ex);
-            throw new WPWithinGeneralException("Select service failed in wrapper");
-        }
-    }
+		try {
+			return ServiceDetailsAdapter.convertServiceDetails(getClient().requestServices());
+		} catch (TException ex) {
+			Logger.getLogger(WPWithinWrapperImpl.class.getName()).log(Level.SEVERE,
+					"Request Services failed in wrapper", ex);
+			throw new WPWithinGeneralException("Request Services failed in wrapper");
+		}
 
-    @Override
-    public WWPaymentResponse makePayment(WWTotalPriceResponse request) throws WPWithinGeneralException {
-  
-        try {
-            return PaymentResponseAdapter.convertPaymentResponse(getClient().makePayment(TotalPriceResponseAdapter.convertWWTotalPriceResponse(request)));
-        } catch (TException ex) {
-            Logger.getLogger(WPWithinWrapperImpl.class.getName()).log(Level.SEVERE, "Failed to make payment in the wrapper", ex);
-            throw new WPWithinGeneralException("Failed to make payment in the wrapper");
-        }
-    }
+	}
 
-    @Override
-    public WWServiceDeliveryToken beginServiceDelivery(int serviceId, WWServiceDeliveryToken serviceDeliveryToken, Integer unitsToSupply) throws WPWithinGeneralException {
-        try {
+	@Override
+	public Set<WWPrice> getServicePrices(Integer serviceId) throws WPWithinGeneralException {
+		try {
+			return PriceAdapter.convertServicePrices(getClient().getServicePrices(serviceId));
+		} catch (TException ex) {
+			Logger.getLogger(WPWithinWrapperImpl.class.getName()).log(Level.SEVERE,
+					"Get Service Prices failed in wrapper", ex);
+			throw new WPWithinGeneralException("Get Service Prices failed in wrapper");
+		}
+	}
 
-            ServiceDeliveryToken sdt = getClient().beginServiceDelivery(serviceId, ServiceDeliveryTokenAdapter.convertWWServiceDeliveryToken(serviceDeliveryToken), unitsToSupply);
+	@Override
+	public WWTotalPriceResponse selectService(Integer serviceId, Integer numberOfUnits, Integer priceId)
+			throws WPWithinGeneralException {
+		try {
+			return TotalPriceResponseAdapter
+					.convertTotalPriceResponse(getClient().selectService(serviceId, numberOfUnits, priceId));
+		} catch (TException ex) {
+			Logger.getLogger(WPWithinWrapperImpl.class.getName()).log(Level.SEVERE, "Select service failed in wrapper",
+					ex);
+			throw new WPWithinGeneralException("Select service failed in wrapper");
+		}
+	}
 
-            return ServiceDeliveryTokenAdapter.convertServiceDeliveryToken(sdt);
+	@Override
+	public WWPaymentResponse makePayment(WWTotalPriceResponse request) throws WPWithinGeneralException {
 
-        } catch (TException ex) {
-            Logger.getLogger(WPWithinWrapperImpl.class.getName()).log(Level.SEVERE, "Failed to begin Service Delivery in the wrapper", ex);
-            throw new WPWithinGeneralException("Failed to begin Service Delivery in the wrapper");
-        }
-    }
+		try {
+			return PaymentResponseAdapter.convertPaymentResponse(
+					getClient().makePayment(TotalPriceResponseAdapter.convertWWTotalPriceResponse(request)));
+		} catch (TException ex) {
+			Logger.getLogger(WPWithinWrapperImpl.class.getName()).log(Level.SEVERE,
+					"Failed to make payment in the wrapper", ex);
+			throw new WPWithinGeneralException("Failed to make payment in the wrapper");
+		}
+	}
 
-    @Override
-    public WWServiceDeliveryToken endServiceDelivery(int serviceId, WWServiceDeliveryToken serviceDeliveryToken, Integer unitsReceived) throws WPWithinGeneralException {
-        try {
-            ServiceDeliveryToken sdt = getClient().endServiceDelivery(serviceId, ServiceDeliveryTokenAdapter.convertWWServiceDeliveryToken(serviceDeliveryToken), unitsReceived);
+	@Override
+	public WWServiceDeliveryToken beginServiceDelivery(int serviceId, WWServiceDeliveryToken serviceDeliveryToken,
+			Integer unitsToSupply) throws WPWithinGeneralException {
+		try {
 
-            return ServiceDeliveryTokenAdapter.convertServiceDeliveryToken(sdt);
-        } catch (TException ex) {
-            Logger.getLogger(WPWithinWrapperImpl.class.getName()).log(Level.SEVERE, "Failed to end Service Delivery in the wrapper", ex);
-            throw new WPWithinGeneralException("Failed to end Service Delivery in the wrapper");
-        }
-    }
+			ServiceDeliveryToken sdt = getClient().beginServiceDelivery(serviceId,
+					ServiceDeliveryTokenAdapter.convertWWServiceDeliveryToken(serviceDeliveryToken), unitsToSupply);
 
-    @Override
-    public void stopRPCAgent() {
+			return ServiceDeliveryTokenAdapter.convertServiceDeliveryToken(sdt);
 
-        try {
+		} catch (TException ex) {
+			Logger.getLogger(WPWithinWrapperImpl.class.getName()).log(Level.SEVERE,
+					"Failed to begin Service Delivery in the wrapper", ex);
+			throw new WPWithinGeneralException("Failed to begin Service Delivery in the wrapper");
+		}
+	}
 
-            if(launcher != null) {
+	@Override
+	public WWServiceDeliveryToken endServiceDelivery(int serviceId, WWServiceDeliveryToken serviceDeliveryToken,
+			Integer unitsReceived) throws WPWithinGeneralException {
+		try {
+			ServiceDeliveryToken sdt = getClient().endServiceDelivery(serviceId,
+					ServiceDeliveryTokenAdapter.convertWWServiceDeliveryToken(serviceDeliveryToken), unitsReceived);
 
-                launcher.stopProcess();
-            }
+			return ServiceDeliveryTokenAdapter.convertServiceDeliveryToken(sdt);
+		} catch (TException ex) {
+			Logger.getLogger(WPWithinWrapperImpl.class.getName()).log(Level.SEVERE,
+					"Failed to end Service Delivery in the wrapper", ex);
+			throw new WPWithinGeneralException("Failed to end Service Delivery in the wrapper");
+		}
+	}
 
-        } catch (Exception e) {
+	@Override
+	public void stopRPCAgent() {
+		try {
+			getClient().CloseRPCAgent();
+		} catch (TException te) {
+			try {
+				throw (te.getCause());
+			} catch (SocketException se) {
+				if (launcher != null) {
+					if (launcher.getProcessHandle().isAlive()) {
+						launcher.stopProcess();
+						System.out.println("RPC Agent Killed");
+					}
+				}
+				System.out.println("RPC Agent Closed");
+			} catch (Throwable e) {
+				System.out.println("RPC Agent Killed");
+				if (launcher != null) {
+					launcher.stopProcess();
+				}
+			}
+		}
+	}
 
-            throw new RuntimeException(e);
-        }
-    }
+	private void startRPCAgent(int port, int callbackPort, Listener launcherListener) {
 
-    private void startRPCAgent(int port, int callbackPort, Listener launcherListener) {
+		String flagLogfile = "wpwithin.log";
+		String flagLogLevels = "debug,error,info,warn,fatal,panic";
+		String flagCallbackPort = callbackPort > 0 ? "-callbackport=" + callbackPort : "";
+		String binBase = System.getenv("WPW_HOME") == null ? "./rpc-agent-bin"
+				: String.format("%s/bin", System.getenv("WPW_HOME"));
 
-        String flagLogfile = "wpwithin.log";
-        String flagLogLevels = "debug,error,info,warn,fatal,panic";
-        String flagCallbackPort = callbackPort > 0 ? "-callbackport="+callbackPort : "";
-        String binBase = System.getenv("WPW_HOME") == null ? "./rpc-agent-bin" : String.format("%s/bin", System.getenv("WPW_HOME"));
+		launcher = new Launcher();
+		Map<OS, PlatformConfig> launchConfig = new HashMap<>(3);
 
-        launcher = new Launcher();
+		PlatformConfig winConfig = new PlatformConfig();
+		winConfig.setCommand(Architecture.IA32,
+				String.format("%s/rpc-agent-windows-386 -port=%d -logfile=%s -loglevel=%s %s", binBase, port,
+						flagLogfile, flagLogLevels, flagCallbackPort));
+		winConfig.setCommand(Architecture.X86_64,
+				String.format("%s/rpc-agent-windows-amd64 -port=%d -logfile=%s -loglevel=%s %s", binBase, port,
+						flagLogfile, flagLogLevels, flagCallbackPort));
+		launchConfig.put(OS.WINDOWS, winConfig);
 
-        Map<OS, PlatformConfig> launchConfig = new HashMap<>(3);
+		PlatformConfig linuxConfig = new PlatformConfig();
+		linuxConfig.setCommand(Architecture.IA32,
+				String.format("%s/rpc-agent-linux-386 -port=%d -logfile=%s -loglevel=%s %s", binBase, port, flagLogfile,
+						flagLogLevels, flagCallbackPort));
+		linuxConfig.setCommand(Architecture.X86_64,
+				String.format("%s/rpc-agent-linux-amd64 -port=%d -logfile=%s -loglevel=%s %s", binBase, port,
+						flagLogfile, flagLogLevels, flagCallbackPort));
+		linuxConfig.setCommand(Architecture.ARM32,
+				String.format("%s/rpc-agent-linux-arm32 -port=%d -logfile=%s -loglevel=%s %s", binBase, port,
+						flagLogfile, flagLogLevels, flagCallbackPort));
+		linuxConfig.setCommand(Architecture.ARM64,
+				String.format("%s/rpc-agent-linux-arm64 -port=%d -logfile=%s -loglevel=%s %s", binBase, port,
+						flagLogfile, flagLogLevels, flagCallbackPort));
+		launchConfig.put(OS.LINUX, linuxConfig);
 
-        PlatformConfig winConfig = new PlatformConfig();
-        winConfig.setCommand(Architecture.IA32, String.format("%s/rpc-agent-windows-386 -port=%d -logfile=%s -loglevel=%s %s", binBase, port, flagLogfile, flagLogLevels, flagCallbackPort));
-        winConfig.setCommand(Architecture.X86_64, String.format("%s/rpc-agent-windows-amd64 -port=%d -logfile=%s -loglevel=%s %s", binBase, port, flagLogfile, flagLogLevels, flagCallbackPort));
-        launchConfig.put(OS.WINDOWS, winConfig);
+		PlatformConfig macConfig = new PlatformConfig();
+		macConfig.setCommand(Architecture.IA32,
+				String.format("%s/rpc-agent/rpc-agent-darwin-386 -port=%d -logfile=%s -loglevel=%s %s", binBase, port,
+						flagLogfile, flagLogLevels, flagCallbackPort));
+		macConfig.setCommand(Architecture.X86_64,
+				String.format("%s/rpc-agent-darwin-amd64 -port=%d -logfile=%s -loglevel=%s %s", binBase, port,
+						flagLogfile, flagLogLevels, flagCallbackPort));
+		launchConfig.put(OS.MAC, macConfig);
 
-        PlatformConfig linuxConfig = new PlatformConfig();
-        linuxConfig.setCommand(Architecture.IA32, String.format("%s/rpc-agent-linux-386 -port=%d -logfile=%s -loglevel=%s %s", binBase, port, flagLogfile, flagLogLevels, flagCallbackPort));
-        linuxConfig.setCommand(Architecture.X86_64, String.format("%s/rpc-agent-linux-amd64 -port=%d -logfile=%s -loglevel=%s %s", binBase, port, flagLogfile, flagLogLevels, flagCallbackPort));
-        linuxConfig.setCommand(Architecture.ARM32, String.format("%s/rpc-agent-linux-arm32 -port=%d -logfile=%s -loglevel=%s %s", binBase, port, flagLogfile, flagLogLevels, flagCallbackPort));
-        linuxConfig.setCommand(Architecture.ARM64, String.format("%s/rpc-agent-linux-arm64 -port=%d -logfile=%s -loglevel=%s %s", binBase, port, flagLogfile, flagLogLevels, flagCallbackPort));
-        launchConfig.put(OS.LINUX, linuxConfig);
-
-
-        PlatformConfig macConfig = new PlatformConfig();
-        macConfig.setCommand(Architecture.IA32, String.format("%s/rpc-agent/rpc-agent-darwin-386 -port=%d -logfile=%s -loglevel=%s %s", binBase, port, flagLogfile, flagLogLevels, flagCallbackPort));
-        macConfig.setCommand(Architecture.X86_64, String.format("%s/rpc-agent-darwin-amd64 -port=%d -logfile=%s -loglevel=%s %s", binBase, port, flagLogfile, flagLogLevels, flagCallbackPort));
-        launchConfig.put(OS.MAC, macConfig);
-
-        launcher.startProcess(launchConfig, launcherListener);
-    }
+		launcher.startProcess(launchConfig, launcherListener);
+	}
 }

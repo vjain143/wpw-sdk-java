@@ -36,7 +36,7 @@ public class WorldpayWithinWrapperTester {
         // ######### SETUP RPC SERVICES ############
         String host = "127.0.0.1";
         Integer port = 9091;
-        WPWithinWrapper sdk = new WPWithinWrapperImpl(host, port, false, rpcAgentListener);
+        WPWithinWrapper sdk = new WPWithinWrapperImpl(host, port, true, rpcAgentListener);
 
         try {
             //        sdk.setupDefaultDevice();
@@ -45,7 +45,7 @@ public class WorldpayWithinWrapperTester {
             sdk.setup("Kevs device", "The device that doeseth belong to kev");
         } catch (WPWithinGeneralException ex) {
             Logger.getLogger(WorldpayWithinWrapperTester.class.getName()).log(Level.SEVERE, "Faield to setup device...", ex);
-        }
+        }}
 
 //        WWHCECard wwHceCard = new WWHCECard();
 //        wwHceCard.setCardNumber("555555555555555");
@@ -119,59 +119,59 @@ public class WorldpayWithinWrapperTester {
 //        } catch (WPWithinGeneralException ex) {
 //            Logger.getLogger(WorldpayWithinWrapper2.class.getName()).log(Level.SEVERE, "Test start service broadcast failed", ex);
 //        }
-        try {
-            Set<WWServiceMessage> serviceMsgs = sdk.deviceDiscovery(port);
-
-            for (WWServiceMessage svcMsg : serviceMsgs) {
-                System.out.println(svcMsg.getDeviceDescription() + ":" + svcMsg.getHostname() + ":" + svcMsg.getServerId() + ":" + svcMsg.getUrlPrefix());
-
-                WWHCECard wwHceCard = new WWHCECard();
-                wwHceCard.setCardNumber("555555555555555");
-                wwHceCard.setCvc("1234");
-                wwHceCard.setExpMonth(10);
-                wwHceCard.setExpYear(2017);
-                wwHceCard.setFirstName("Kevin");
-                wwHceCard.setLastName("Gordon");
-                wwHceCard.setType("VISA");
-                Map<String, String> pspConfig = new HashMap<>();
-                try {
-                    sdk.initConsumer("http://", svcMsg.getHostname(), svcMsg.getPortNumber(), svcMsg.getUrlPrefix(), svcMsg.getServerId(), wwHceCard, pspConfig);
-                } catch (WPWithinGeneralException ex) {
-                    Logger.getLogger(WorldpayWithinWrapperTester.class.getName()).log(Level.SEVERE, "Failed to initiate consumer", ex);
-                }
-                
-                Set<WWServiceDetails> svcDetails = sdk.requestServices();
-
-                if (svcDetails != null && svcDetails.size() > 0) {
-
-                    Logger.getLogger(WPWithinWrapperImpl.class.getName()).log(Level.INFO, "Ouputting service Details");
-
-                    WWServiceDetails svcDetail = svcDetails.iterator().next();
-
-                    Logger.getLogger(WPWithinWrapperImpl.class.getName()).log(Level.INFO, svcDetail.getServiceId() + " - " + svcDetail.getServiceDescription() + "\n");
-                    Set<WWPrice> pricesReceived = sdk.getServicePrices(svcDetail.getServiceId());
-
-                    if (pricesReceived != null && pricesReceived.size() > 0) {
-
-                        Logger.getLogger(WPWithinWrapperImpl.class.getName()).log(Level.INFO, "Ouputting prices");
-
-                            // Get the first price of the first service for tesitng purposes....
-                        WWPrice price = pricesReceived.iterator().next();
-
-                        Logger.getLogger(WPWithinWrapperImpl.class.getName()).log(Level.INFO, price.getDescription() + " - " + price.getId() + " - " + price.getUnitId() + " - " + price.getUnitDescription() + " - " + price.getPricePerUnit().getAmount() + " - " + price.getPricePerUnit().getCurrencyCode() + "\n");
-
-                    } else {
-                        Logger.getLogger(WPWithinWrapperImpl.class.getName()).log(Level.INFO, "No prices found");
-                    }
-
-                } else {
-                    Logger.getLogger(WPWithinWrapperImpl.class.getName()).log(Level.INFO, "No Service Details found");
-                }
-            }
-        } catch (WPWithinGeneralException ex) {
-            Logger.getLogger(WorldpayWithinWrapperTester.class.getName()).log(Level.SEVERE, "Test device Discovery failed", ex);
-        }
-    }
+//        try {
+//            Set<WWServiceMessage> serviceMsgs = sdk.deviceDiscovery(port);
+//
+//            for (WWServiceMessage svcMsg : serviceMsgs) {
+//                System.out.println(svcMsg.getDeviceDescription() + ":" + svcMsg.getHostname() + ":" + svcMsg.getServerId() + ":" + svcMsg.getUrlPrefix());
+//
+//                WWHCECard wwHceCard = new WWHCECard();
+//                wwHceCard.setCardNumber("555555555555555");
+//                wwHceCard.setCvc("1234");
+//                wwHceCard.setExpMonth(10);
+//                wwHceCard.setExpYear(2017);
+//                wwHceCard.setFirstName("Kevin");
+//                wwHceCard.setLastName("Gordon");
+//                wwHceCard.setType("VISA");
+//                Map<String, String> pspConfig = new HashMap<>();
+//                try {
+//                    sdk.initConsumer("http://", svcMsg.getHostname(), svcMsg.getPortNumber(), svcMsg.getUrlPrefix(), svcMsg.getServerId(), wwHceCard, pspConfig);
+//                } catch (WPWithinGeneralException ex) {
+//                    Logger.getLogger(WorldpayWithinWrapperTester.class.getName()).log(Level.SEVERE, "Failed to initiate consumer", ex);
+//                }
+//                
+//                Set<WWServiceDetails> svcDetails = sdk.requestServices();
+//
+//                if (svcDetails != null && svcDetails.size() > 0) {
+//
+//                    Logger.getLogger(WPWithinWrapperImpl.class.getName()).log(Level.INFO, "Ouputting service Details");
+//
+//                    WWServiceDetails svcDetail = svcDetails.iterator().next();
+//
+//                    Logger.getLogger(WPWithinWrapperImpl.class.getName()).log(Level.INFO, svcDetail.getServiceId() + " - " + svcDetail.getServiceDescription() + "\n");
+//                    Set<WWPrice> pricesReceived = sdk.getServicePrices(svcDetail.getServiceId());
+//
+//                    if (pricesReceived != null && pricesReceived.size() > 0) {
+//
+//                        Logger.getLogger(WPWithinWrapperImpl.class.getName()).log(Level.INFO, "Ouputting prices");
+//
+//                            // Get the first price of the first service for tesitng purposes....
+//                        WWPrice price = pricesReceived.iterator().next();
+//
+//                        Logger.getLogger(WPWithinWrapperImpl.class.getName()).log(Level.INFO, price.getDescription() + " - " + price.getId() + " - " + price.getUnitId() + " - " + price.getUnitDescription() + " - " + price.getPricePerUnit().getAmount() + " - " + price.getPricePerUnit().getCurrencyCode() + "\n");
+//
+//                    } else {
+//                        Logger.getLogger(WPWithinWrapperImpl.class.getName()).log(Level.INFO, "No prices found");
+//                    }
+//
+//                } else {
+//                    Logger.getLogger(WPWithinWrapperImpl.class.getName()).log(Level.INFO, "No Service Details found");
+//                }
+//            }
+//        } catch (WPWithinGeneralException ex) {
+//            Logger.getLogger(WorldpayWithinWrapperTester.class.getName()).log(Level.SEVERE, "Test device Discovery failed", ex);
+//        }
+//    }
 
     private static final Listener rpcAgentListener = new Listener() {
         @Override
