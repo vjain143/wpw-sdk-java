@@ -21,7 +21,13 @@ public class Main {
 
         System.out.println("Starting Consumer Example Written in Java.");
 
-        wpw = new WPWithinWrapperImpl("127.0.0.1", 10001, true, rpcAgentListener);
+        // define log file name for the rpc agent (based on the package name),
+        // e.g. "rpc-within-consumerex.log";
+        String packageName = new Object(){}.getClass().getPackage().getName();
+        String[] splitedPkgName = packageName.split("\\.");
+        String rpcLogFile = "rpc-within-" + splitedPkgName[splitedPkgName.length-1] + ".log";
+
+        wpw = new WPWithinWrapperImpl("127.0.0.1", 10001, true, rpcAgentListener, rpcLogFile);
 
         try {
 

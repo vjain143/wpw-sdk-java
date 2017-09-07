@@ -23,7 +23,13 @@ public class Main {
 
             System.out.println("WorldpayWithin Sample Producer...");
 
-            WPWithinWrapper wpw = new WPWithinWrapperImpl("127.0.0.1", 10000, true, wpWithinEventListener, 10001, rpcAgentListener);
+            // define log file name for the rpc agent (based on the package name),
+            // e.g. "rpc-within-producercallbackex.log"
+            String packageName = new Object(){}.getClass().getPackage().getName();
+            String[] splitedPkgName = packageName.split("\\.");
+            String rpcLogFile = "rpc-within-" + splitedPkgName[splitedPkgName.length-1] + ".log";
+            
+            WPWithinWrapper wpw = new WPWithinWrapperImpl("127.0.0.1", 10000, true, wpWithinEventListener, 10001, rpcAgentListener, rpcLogFile);
 
             wpw.setup("Producer Example", "Example WorldpayWithin producer");
 

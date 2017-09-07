@@ -36,7 +36,12 @@ public class WorldpayWithinWrapperTester {
         // ######### SETUP RPC SERVICES ############
         String host = "127.0.0.1";
         Integer port = 9091;
-        WPWithinWrapper sdk = new WPWithinWrapperImpl(host, port, false, rpcAgentListener);
+        
+        String packageName = new Object(){}.getClass().getPackage().getName();
+        String[] splitedPkgName = packageName.split("\\.");
+        String rpcLogFile = "rpc-within-" + splitedPkgName[splitedPkgName.length-1] + ".log";
+        
+        WPWithinWrapper sdk = new WPWithinWrapperImpl(host, port, false, rpcAgentListener, rpcLogFile);
 
         try {
             //        sdk.setupDefaultDevice();

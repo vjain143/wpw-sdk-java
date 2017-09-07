@@ -43,12 +43,12 @@ public class WPWithinWrapperImpl implements WPWithinWrapper {
     private EventServer eventServer;
     private Launcher launcher;
 
-    public WPWithinWrapperImpl(String host, Integer port, boolean startRPCAgent, Listener launcherListener) {
+    public WPWithinWrapperImpl(String host, Integer port, boolean startRPCAgent, Listener launcherListener, String rpcAgentLogFile) {
 
-        this(host, port, startRPCAgent, null, 0, launcherListener);
+        this(host, port, startRPCAgent, null, 0, launcherListener, rpcAgentLogFile);
     }
 
-    public WPWithinWrapperImpl(String rpcHost, Integer rpcPort, boolean startRPCAgent, EventListener eventListener, int rpcCallbackPort, Listener launcherListener){
+    public WPWithinWrapperImpl(String rpcHost, Integer rpcPort, boolean startRPCAgent, EventListener eventListener, int rpcCallbackPort, Listener launcherListener, String rpcAgentLogFile){
 
         this.hostConfig = rpcHost;
         this.portConfig = rpcPort;
@@ -72,7 +72,7 @@ public class WPWithinWrapperImpl implements WPWithinWrapper {
 
         if(startRPCAgent) {
 
-            startRPCAgent(rpcPort, rpcCallbackPort, launcherListener);
+            startRPCAgent(rpcPort, rpcCallbackPort, launcherListener, rpcAgentLogFile);
         }
 
         setClientIfNotSet();
@@ -284,9 +284,8 @@ public class WPWithinWrapperImpl implements WPWithinWrapper {
         }
     }
 
-    private void startRPCAgent(int port, int callbackPort, Listener launcherListener) {
+    private void startRPCAgent(int port, int callbackPort, Listener launcherListener, String flagLogfile) {
 
-        String flagLogfile = "wpwithin.log";
         String flagLogLevels = "debug,error,info,warn,fatal,panic";
         String flagCallbackPort = callbackPort > 0 ? "-callbackport="+callbackPort : "";
         String binBase = System.getenv("WPW_HOME") == null ? "./rpc-agent-bin" : String.format("%s/bin", System.getenv("WPW_HOME"));
